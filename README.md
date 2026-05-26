@@ -1,1 +1,1 @@
-# JobSearch-AI
+This application is a full-stack AI job-search platform where users can upload/paste a resume, set job preferences, search jobs through an API, save opportunities, and later use AI for resume matching, cover letters, interview prep, and application tracking.
