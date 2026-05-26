@@ -1,0 +1,78 @@
+Run React live dev server
+-------------------------
+
+cd frontend
+npm run dev
+
+Use this while coding React.
+Your changes should update automatically in the browser with HMR.
+
+Common URL:
+
+http://localhost:5173
+
+
+Run Express backend server
+--------------------------
+
+cd backend
+node server.js
+
+Use this to start your backend API/server.
+
+
+Run frontend and backend together
+---------------------------------
+
+Open two terminals.
+
+Terminal 1:
+
+cd backend
+node server.js
+
+Terminal 2:
+
+cd frontend
+npm run dev
+
+
+Stop a running server
+---------------------
+
+Ctrl + C
+
+
+When to use npm run preview
+---------------------------
+
+Only use this after building the app.
+
+cd frontend
+npm run build
+npm run preview
+
+Important:
+npm run preview does not work like the live dev server.
+If you make code changes, run npm run build again before previewing.
+"""
+
+Install Axios
+-------------
+
+cd frontend
+npm install axios
+
+Axios is used to send HTTP requests from React to a backend API.
+
+Example:
+
+import axios from "axios";
+
+axios.get("http://localhost:5000/api/foods")
+  .then((response) => {
+    console.log(response.data);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
