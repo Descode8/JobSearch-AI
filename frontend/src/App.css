@@ -17,10 +17,11 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
 }
 .app-name-icon-container img {
   width: 25px;
+  margin-bottom: 5px;
 }
 
 .navbar {
@@ -94,11 +95,12 @@ body {
 
 .primary-button,
 .secondary-button {
-  padding: 14px 22px;
-  border-radius: 12px;
+  padding: 10px 20px;
+  border-radius: 20px;
   font-size: 16px;
   font-weight: 800;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .primary-button {
@@ -157,7 +159,6 @@ body {
 .features-section,
 .steps-section {
   padding: 70px 8%;
-  background: oklch(27.9% 0.041 260.031);
 }
 
 .features-section h2,

@@ -77,7 +77,7 @@ app.get("/api/landing", (req, res) => {
   // Send JSON data back to the frontend.
     res.json({
     appName: "JobSearch AI",
-    appIcon: "./public/pro-icon.svg",
+    appIcon: "./icon.png",
     headline: "AI-powered job search, resume matching, and application tracking.",
     subheadline:
         "Search job opportunities, save listings, analyze resume fit, generate tailored materials, and organize your job search workflow.",
@@ -90,6 +90,15 @@ app.get("/api/landing", (req, res) => {
         "Prepare for interviews",
         "Track application progress"
     ]
+    });
+});
+
+/*
+job-search-setup
+*/
+app.get("/api/job-search-setup", (req, res) => {
+    res.json({
+        pageTitle: "Start Your Job Search"
     });
 });
 

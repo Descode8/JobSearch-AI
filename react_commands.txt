@@ -56,6 +56,9 @@ Important:
 npm run preview does not work like the live dev server.
 If you make code changes, run npm run build again before previewing.
 """
+installs the library that lets a React app have multiple pages/routes (MUST DO THIS IN FRONTEND)
+------------------------------------------------------------------------------------------------
+npm install react-router-dom 
 
 Install Axios
 -------------

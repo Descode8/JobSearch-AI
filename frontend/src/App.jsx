@@ -1,22 +1,13 @@
-// useEffect and useState are React hooks.
-// useState lets a component remember data.
-// useEffect lets a component run code after it renders, such as fetching data.
 import { useEffect, useState } from "react";
-
-// Axios is a library used to make HTTP requests.
-// Here, React uses Axios to call your Express backend.
+import { Routes, Route, Link } from "react-router-dom";
+import JobSearchSetupPage from "./components/JobSearchSetupPage/JobSearchPageSetup.jsx";
 import axios from "axios";
-
-// App.css is usually for styles related to this App component/page.
-import "./App.css";
-
-// index.css is usually your global CSS file.
-// In most React/Vite apps, this is imported in main.jsx instead of App.jsx.
+import "././App.css";
 import "./index.css";
 
 // App is your root React component.
 // main.jsx renders this component into <div id="root"></div> in index.html.
-function App() {
+function LandingPage() {
   /*
     landingData stores the data returned from your Express backend.
 
@@ -26,7 +17,7 @@ function App() {
   const [landingData, setLandingData] = useState(null);
 
   /*
-    loading stores whether the app is still waiting for data.
+    loading stores whether the LandingPage is still waiting for data.
 
     Starting value is true because when the page first loads,
     we immediately need to fetch data from the backend.
@@ -67,21 +58,8 @@ function App() {
       */
       const response = await axios.get("http://localhost:5000/api/landing");
 
-      /*
-        response.data contains the JSON returned by Express.
-
-        Example response.data:
-        {
-          appName: "JobSearch AI",
-          appIcon: "../pathToImage"
-          headline: "...",
-          subheadline: "...",
-          features: [...]
-        }
-
-        setLandingData saves that object into React state.
-        When state changes, React re-renders the page.
-      */
+        // setLandingData saves that object into React state.
+        // When state changes, React re-renders the page.
       setLandingData(response.data);
 
       /*
@@ -91,7 +69,8 @@ function App() {
       setLoading(false);
     } catch (error) {
       /*
-        If something goes wrong, this prints the error in the browser console.
+        If something goes wrong, this 
+        prints the error in the browser console.
 
         Common causes:
         - Backend server is not running
@@ -105,6 +84,7 @@ function App() {
         Even if the request fails, we still stop loading.
         Otherwise, the app would say "Loading..." forever.
       */
+    } finally {
       setLoading(false);
     }
   }
@@ -168,7 +148,9 @@ function App() {
           <p>{landingData.subheadline}</p>
 
           <div className="button-row">
-            <button className="primary-button">Get Started</button>
+            <Link to="/job-search-setup" className="primary-button">
+              Get Started
+            </Link>
             <button className="secondary-button">View Demo</button>
           </div>
         </div>
@@ -250,6 +232,16 @@ function App() {
         </div>
       </section>
     </main>
+    
+  );
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/job-search-setup" element={<JobSearchSetupPage />} />
+    </Routes>
   );
 }
 
