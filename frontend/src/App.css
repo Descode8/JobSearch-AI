@@ -12,6 +12,17 @@ body {
   min-height: 100vh;
 }
 
+.app-name-icon-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.app-name-icon-container img {
+  width: 25px;
+}
+
 .navbar {
   padding: 24px 2%;
   background: white;
