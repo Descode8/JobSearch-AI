@@ -77,7 +77,7 @@ app.get("/api/landing", (req, res) => {
   // Send JSON data back to the frontend.
     res.json({
     appName: "JobSearch AI",
-    appIcon: "./icon.png",
+    appIcon: "./icon.svg",
     headline: "AI-powered job search, resume matching, and application tracking.",
     subheadline:
         "Search job opportunities, save listings, analyze resume fit, generate tailored materials, and organize your job search workflow.",

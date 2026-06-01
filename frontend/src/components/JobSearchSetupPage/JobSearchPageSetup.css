@@ -15,11 +15,8 @@
     gap: 20px;
 }
 
-p {
+.setup-page p {
     max-width: 650px;
-    color: oklch(44.6% 0.03 256.802);
-    font-size: 19px;
-    line-height: 1.7;
     text-align: center;
 }
 

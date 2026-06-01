@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./JobSearchPageSetup.css";
+import "../../index.css";
+import ResumeDropZone from "../ResumeDropZone/ResumeDropZone.jsx"
 
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -51,66 +53,57 @@ function JobSearchSetupPage() {
 
   function getInputStyles(value) {
     const isFilled = value.trim() !== "";
-    const defaultColor = "oklch(44.6% 0.03 256.802)";
-    const focusColor = "#0f62fe";
-    const filledColor = "#27ae60";
+
+    const borderColor       = "#ffffff";
+    const placeholderColor  = "var(--text)";
+    const focusColor        = "var(--btn)";
+    const filledColor       = "var(--input-filled)";
 
     return {
-      // Styles the outer MUI outlined input container
       "& .MuiOutlinedInput-root": {
         borderRadius: "10px",
 
-        // Default border before hover or focus
         "& fieldset": {
-          borderColor: isFilled ? filledColor : defaultColor,
-          borderWidth: ".5px",
+          borderColor: isFilled ? filledColor : borderColor,
+          borderWidth: ".75px",
         },
 
-        // Border when the mouse is hovering over the input
         "&:hover fieldset": {
-          borderColor: isFilled ? filledColor : defaultColor,
-          borderWidth: "1px",
+          borderColor: isFilled ? filledColor : borderColor,
+          borderWidth: "2px",
         },
 
-        // Border when the input is selected/focused
         "&.Mui-focused fieldset": {
           borderColor: isFilled ? filledColor : focusColor,
           borderWidth: "2px",
         },
       },
 
-      // Text the user types inside regular text inputs
       "& .MuiInputBase-input": {
         color: "white",
       },
 
-      // Text shown inside the dropdown/select field
       "& .MuiSelect-select": {
         color: "white",
       },
 
-      // Dropdown arrow icon color
       "& .MuiSvgIcon-root": {
-        color: isFilled ? filledColor : defaultColor,
+        color: isFilled ? filledColor : borderColor,
       },
 
-      // Placeholder text before the user types
       "& .MuiInputBase-input::placeholder": {
-        color: defaultColor,
+        color: placeholderColor,
         opacity: 1,
       },
 
-      // Hides the placeholder when the input is focused
       "& .MuiInputBase-input:focus::placeholder": {
         opacity: 0,
       },
 
-      // Default label text color
       "& .MuiInputLabel-root": {
-        color: isFilled ? filledColor : defaultColor,
+        color: isFilled ? filledColor : placeholderColor,
       },
 
-      // Label text color when the input is focused
       "& .MuiInputLabel-root.Mui-focused": {
         color: isFilled ? filledColor : focusColor,
       },
@@ -172,6 +165,7 @@ function JobSearchSetupPage() {
             Continue
           </Button> */}
         </form>
+        <ResumeDropZone/>
       </section>
     </main>
   );
