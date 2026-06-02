@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import "./JobSearchPageSetup.css";
 import "../../index.css";
-import ResumeDropZone from "../ResumeDropZone/ResumeDropZone.jsx"
+import ResumeDropZone from "../ResumeDropZone/ResumeDropZone.jsx";
 
 import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 
 function JobSearchSetupPage() {
@@ -17,13 +16,19 @@ function JobSearchSetupPage() {
   const [location, setLocation] = useState("");
   const [workType, setWorkType] = useState("");
 
+  // Resume State
+  const [resumeFile, setResumeFile] = useState(null);
+  const [resumePreviewUrl, setResumePreviewUrl] = useState("");
+
   useEffect(() => {
     getJobSearchSetupPageData();
   }, []);
 
   async function getJobSearchSetupPageData() {
     try {
-      const response = await axios.get("http://localhost:5000/api/job-search-setup");
+      const response = await axios.get(
+        "http://localhost:5000/api/job-search-setup"
+      );
 
       console.log("setup page data:", response.data);
 
@@ -35,29 +40,13 @@ function JobSearchSetupPage() {
     }
   }
 
-  if (loading) {
-    return (
-      <main className="page">
-        <p>Loading setup page...</p>
-      </main>
-    );
-  }
-
-  if (!jobSearchSetupPageData) {
-    return (
-      <main className="page">
-        <p>Could not load setup page data.</p>
-      </main>
-    );
-  }
-
   function getInputStyles(value) {
     const isFilled = value.trim() !== "";
 
-    const borderColor       = "#ffffff";
-    const placeholderColor  = "var(--text)";
-    const focusColor        = "var(--btn)";
-    const filledColor       = "var(--input-filled)";
+    const borderColor = "#ffffff";
+    const placeholderColor = "var(--text)";
+    const focusColor = "var(--btn)";
+    const filledColor = "var(--input-filled)";
 
     return {
       "& .MuiOutlinedInput-root": {
@@ -110,6 +99,30 @@ function JobSearchSetupPage() {
     };
   }
 
+  function handleResumeSelected(file, previewUrl) {
+    setResumeFile(file);
+    setResumePreviewUrl(previewUrl);
+
+    console.log("Selected resume file:", file);
+    console.log("Resume preview URL:", previewUrl);
+  }
+
+  if (loading) {
+    return (
+      <main className="page">
+        <p>Loading setup page...</p>
+      </main>
+    );
+  }
+
+  if (!jobSearchSetupPageData) {
+    return (
+      <main className="page">
+        <p>Could not load setup page data.</p>
+      </main>
+    );
+  }
+
   return (
     <main className="page">
       <section className="setup-page">
@@ -121,7 +134,6 @@ function JobSearchSetupPage() {
 
         <form className="setup-form">
           <div className="input-field-container">
-
             <TextField
               required
               id="job-title"
@@ -130,6 +142,7 @@ function JobSearchSetupPage() {
               variant="outlined"
               margin="normal"
               fullWidth
+              value={jobTitle}
               onChange={(event) => setJobTitle(event.target.value)}
               sx={getInputStyles(jobTitle)}
             />
@@ -140,6 +153,7 @@ function JobSearchSetupPage() {
               type="text"
               fullWidth
               margin="normal"
+              value={location}
               onChange={(event) => setLocation(event.target.value)}
               sx={getInputStyles(location)}
             />
@@ -148,24 +162,20 @@ function JobSearchSetupPage() {
               required
               select
               label="Select Work Type"
-              defaultValue=""
+              value={workType}
               fullWidth
               margin="normal"
               onChange={(event) => setWorkType(event.target.value)}
               sx={getInputStyles(workType)}
             >
-              {/* <MenuItem value="">Select work type</MenuItem> */}
               <MenuItem value="remote">Remote</MenuItem>
               <MenuItem value="hybrid">Hybrid</MenuItem>
               <MenuItem value="onsite">On-site</MenuItem>
             </TextField>
           </div>
-
-          {/* <Button type="submit" variant="contained" fullWidth>
-            Continue
-          </Button> */}
         </form>
-        <ResumeDropZone/>
+
+        <ResumeDropZone onFileSelected={handleResumeSelected} />
       </section>
     </main>
   );

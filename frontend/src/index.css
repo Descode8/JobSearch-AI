@@ -42,7 +42,7 @@
   :root {
     --text: oklch(44.6% 0.03 256.802);
     --text-h: #f3f4f6;
-    --bg: oklch(20.8% 0.042 265.755);
+    --bg: #02061897;
     --border: #2e303a;
     --code-bg: #1f2028;
     --accent: #c084fc;
@@ -156,7 +156,7 @@ code {
 /* Page background and floating dot overlay */
 .page {
   min-height: 100vh;
-  background: #07142d;
+  background: var(--bg);
   position: relative;
   overflow: hidden;
   isolation: isolate;
@@ -173,41 +173,42 @@ code {
 }
 
 /* Main floating dots */
+/* Main floating tiny dots */
 .page::before {
   background-image:
-    radial-gradient(circle, rgba(255, 255, 255, 0.75) 0 4px, transparent 5px),
-    radial-gradient(circle, rgba(255, 255, 255, 0.5) 0 6px, transparent 7px),
-    radial-gradient(circle, rgba(255, 255, 255, 0.25) 0 8px, transparent 9px),
-    radial-gradient(circle, rgba(37, 99, 235, 0.45) 0 7px, transparent 8px);
+    radial-gradient(circle, rgba(0, 4, 255, 0.5) 0 1px, transparent 2px),
+    radial-gradient(circle, rgba(0, 255, 42, 0.45) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle, rgba(205, 103, 25, 0.25) 0 2px, transparent 3px),
+    radial-gradient(circle, rgba(255, 21, 0, 0.35) 0 1.5px, transparent 2.5px);
 
   background-size:
-    260px 260px,
-    340px 340px,
-    420px 420px,
-    500px 500px;
+    173px 241px,
+    289px 337px,
+    421px 367px,
+    557px 463px;
 
   background-position:
-    20px 40px,
-    120px 180px,
-    60px 260px,
-    240px 100px;
+    23px 47px,
+    181px 129px,
+    73px 311px,
+    347px 219px;
 
   animation: floatDotsOne 12s ease-in-out infinite alternate;
 }
 
-/* Second floating dot layer */
+/* Second floating tiny dot layer */
 .page::after {
   background-image:
-    radial-gradient(circle, rgba(255, 255, 255, 1) 0 3px, transparent 4px),
-    radial-gradient(circle, rgba(255, 255, 255, 0.5) 0 5px, transparent 6px),
-    radial-gradient(circle, rgba(255, 255, 255, 0.25) 0 7px, transparent 8px),
-    radial-gradient(circle, rgba(59, 130, 246, 0.35) 0 6px, transparent 7px);
-
+    radial-gradient(circle, rgba(0, 170, 255, 0.5) 0 1px, transparent 2px),
+    radial-gradient(circle, rgba(140, 255, 0, 0.45) 0 1.5px, transparent 2.5px),
+    radial-gradient(circle, rgba(151, 70, 8, 0.25) 0 2px, transparent 3px),
+    radial-gradient(circle, rgba(176, 16, 2, 0.35) 0 1.5px, transparent 2.5px);
+    
   background-size:
+    220px 220px,
     300px 300px,
     380px 380px,
-    460px 460px,
-    540px 540px;
+    460px 460px;
 
   background-position:
     150px 60px,

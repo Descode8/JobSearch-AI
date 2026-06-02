@@ -46,7 +46,7 @@
 }
 
 .hero {
-  padding: 80px 8%;
+  padding: 50px 8%;
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
   gap: 48px;
@@ -112,10 +112,10 @@
 
 .hero-card {
   background: white;
-  border: 1px solid #e6eaf2;
+  border: 2px solid var(--btn-hover);
   border-radius: 24px;
   padding: 32px;
-  box-shadow: 0 24px 60px rgba(15, 35, 75, 0.12);
+  box-shadow: 0 0px 10px var(--btn);
 }
 
 .hero-card h3 {
@@ -146,7 +146,7 @@
 
 .features-section,
 .steps-section {
-  padding: 70px 8%;
+  padding: 15px 8%;
 }
 
 .features-section h2,
@@ -167,7 +167,8 @@
 .step-card {
   padding: 24px;
   background: white;
-  border: 1px solid #e6eaf2;
+  border: 1px solid var(--btn-hover);
+  box-shadow: 0 0px 10px var(--btn);
   border-radius: 18px;
 }
 

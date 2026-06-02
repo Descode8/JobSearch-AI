@@ -16,8 +16,9 @@
 }
 
 .setup-page p {
-    max-width: 650px;
+    max-width: 950px;
     text-align: center;
+    margin: 10px auto;
 }
 
 .setup-form {
