@@ -172,51 +172,114 @@ code {
   will-change: transform, opacity;
 }
 
-/* Main floating dots */
-/* Main floating tiny dots */
+/* Main floating tiny dot layer */
 .page::before {
   background-image:
-    radial-gradient(circle, rgba(0, 4, 255, 0.5) 0 1px, transparent 2px),
-    radial-gradient(circle, rgba(0, 255, 42, 0.45) 0 1.5px, transparent 2.5px),
-    radial-gradient(circle, rgba(205, 103, 25, 0.25) 0 2px, transparent 3px),
-    radial-gradient(circle, rgba(255, 21, 0, 0.35) 0 1.5px, transparent 2.5px);
+    radial-gradient(circle at 12px 18px, rgba(0, 170, 255, 0.32) 0 1px, transparent 1px),
+    radial-gradient(circle at 83px 41px, rgba(0, 255, 42, 0.26) 0 1px, transparent 2px),
+    radial-gradient(circle at 146px 92px, rgba(205, 103, 25, 0.22) 0 1px, transparent 3px),
+    radial-gradient(circle at 37px 137px, rgba(255, 21, 0, 0.22) 0 1px, transparent .5px),
+
+    radial-gradient(circle at 211px 63px, rgba(0, 170, 255, 0.28) 0 1px, transparent 2px),
+    radial-gradient(circle at 52px 201px, rgba(0, 255, 42, 0.22) 0 1px, transparent 2px),
+    radial-gradient(circle at 178px 244px, rgba(205, 103, 25, 0.18) 0 1px, transparent 3px),
+    radial-gradient(circle at 267px 156px, rgba(255, 21, 0, 0.2) 0 1px, transparent 2px);
 
   background-size:
-    173px 241px,
-    289px 337px,
-    421px 367px,
-    557px 463px;
+    317px 241px,
+    421px 293px,
+    509px 337px,
+    389px 461px,
+    557px 419px,
+    631px 487px,
+    467px 563px,
+    719px 607px;
 
   background-position:
-    23px 47px,
-    181px 129px,
-    73px 311px,
-    347px 219px;
+    17px 31px,
+    113px 59px,
+    241px 127px,
+    71px 203px,
+    331px 89px,
+    43px 317px,
+    197px 271px,
+    409px 149px;
 
-  animation: floatDotsOne 12s ease-in-out infinite alternate;
+  background-repeat: repeat;
+
+  animation: floatDotsOne 8s ease-in-out infinite alternate;
 }
 
 /* Second floating tiny dot layer */
 .page::after {
   background-image:
-    radial-gradient(circle, rgba(0, 170, 255, 0.5) 0 1px, transparent 2px),
-    radial-gradient(circle, rgba(140, 255, 0, 0.45) 0 1.5px, transparent 2.5px),
-    radial-gradient(circle, rgba(151, 70, 8, 0.25) 0 2px, transparent 3px),
-    radial-gradient(circle, rgba(176, 16, 2, 0.35) 0 1.5px, transparent 2.5px);
-    
+    radial-gradient(circle at 44px 73px, rgb(0, 170, 255) 0 1px, transparent 2px),
+    radial-gradient(circle at 132px 26px, rgb(140, 255, 0) 0 1px, transparent 2px),
+    radial-gradient(circle at 219px 118px, rgb(255, 111, 0) 0 1px, transparent 2px),
+    radial-gradient(circle at 91px 214px, rgb(255, 21, 0) 0 1px, transparent .5px),
+
+    radial-gradient(circle at 306px 177px, rgb(0, 170, 255) 0 1px, transparent 2px),
+    radial-gradient(circle at 156px 334px, rgb(140, 255, 0) 0 1px, transparent 2px),
+    radial-gradient(circle at 382px 282px, rgb(255, 111, 0) 0 1px, transparent 2px),
+    radial-gradient(circle at 493px 91px, rgb(255, 23, 2) 0 1px, transparent 2px);
+
   background-size:
-    220px 220px,
-    300px 300px,
-    380px 380px,
-    460px 460px;
+    283px 353px,
+    397px 431px,
+    521px 389px,
+    449px 587px,
+    673px 503px,
+    593px 647px,
+    761px 571px,
+    829px 709px;
 
   background-position:
-    150px 60px,
-    40px 220px,
-    220px 320px,
-    300px 140px;
+    91px 17px,
+    271px 113px,
+    37px 261px,
+    183px 73px,
+    421px 211px,
+    59px 431px,
+    349px 331px,
+    607px 149px;
 
-  animation: floatDotsTwo 15s ease-in-out infinite alternate;
+  background-repeat: repeat;
+
+  animation: floatDotsTwo 10s ease-in-out infinite alternate;
+}
+
+@keyframes floatDotsOne {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.35;
+  }
+
+  50% {
+    transform: translate3d(-18px, -22px, 0);
+    opacity: 0.65;
+  }
+
+  100% {
+    transform: translate3d(22px, -34px, 0);
+    opacity: 0.4;
+  }
+}
+
+@keyframes floatDotsTwo {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.25;
+  }
+
+  50% {
+    transform: translate3d(24px, -18px, 0);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translate3d(-20px, -31px, 0);
+    opacity: 0.32;
+  }
 }
 
 /* Keeps actual page content above the dots */
@@ -234,38 +297,4 @@ button,
 a {
   position: relative;
   z-index: 1;
-}
-
-@keyframes floatDotsOne {
-  0% {
-    transform: translate3d(0, 0, 0);
-    opacity: 0.3;
-  }
-
-  50% {
-    transform: translate3d(-45px, -55px, 0);
-    opacity: 0.95;
-  }
-
-  100% {
-    transform: translate3d(45px, -95px, 0);
-    opacity: 0.4;
-  }
-}
-
-@keyframes floatDotsTwo {
-  0% {
-    transform: translate3d(0, 0, 0);
-    opacity: 0.2;
-  }
-
-  50% {
-    transform: translate3d(60px, -40px, 0);
-    opacity: 0.75;
-  }
-
-  100% {
-    transform: translate3d(-40px, -85px, 0);
-    opacity: 0.3;
-  }
 }

@@ -3,7 +3,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import JobSearchSetupPage from "./components/JobSearchSetupPage/JobSearchPageSetup.jsx";
 import axios from "axios";
 import "././App.css";
-import "./index.css";
+import "./styles.css";
 
 // App is your root React component.
 // main.jsx renders this component into <div id="root"></div> in index.html.

@@ -1,0 +1,9 @@
+.job-search-text-field-container h3 {
+    margin-top: 20px;
+}
+
+.job-search-text-field-container {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
