@@ -6,10 +6,13 @@ import {
   getInputStyles,
   getDropdownMenuProps,
   dropdownItemStyles,
+  buttonStyles
 } from "../../utils/muiStyles";
+import { targetCompanies } from "../../utils/companyOptions.js";
 
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
+import Button from "@mui/material/Button";
 
 import ResumeDropZone from "../ResumeDropZone/ResumeDropZone.jsx";
 import JobSearchTextField from "../JobSearchTextField/JobSearchTextField.jsx";
@@ -23,6 +26,11 @@ function JobSearchSetupPage() {
   const [location, setLocation] = useState("");
   const [salaryRange, setSalaryRange] = useState("");
   const [workType, setWorkType] = useState("");
+  const [experienceLevel, setExperienceLevel] = useState("");
+  const [targetCompany, setTargetCompany] = useState("");
+  const [veteranStatus, setVeteranStatus] = useState("");
+  const [securityClearance, setSecurityClearance] = useState("");
+  const [extraDetails, setExtraDetails] = useState(""); 
 
   // Resume State
   const [resumeFile, setResumeFile] = useState(null);
@@ -56,6 +64,45 @@ function JobSearchSetupPage() {
     console.log("Resume preview URL:", previewUrl);
   }
 
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    if (!resumeFile) {
+      alert("Please upload your resume before submitting.");
+      return;
+    }
+
+    // OpenAI Payload
+    const formData = new FormData();
+
+    formData.append("jobTitle", jobTitle);
+    formData.append("location", location);
+    formData.append("salaryRange", salaryRange);
+    formData.append("workType", workType);
+    formData.append("experienceLevel", experienceLevel);
+    formData.append("targetCompany", targetCompany);
+    formData.append("veteranStatus", veteranStatus);
+    formData.append("securityClearance", securityClearance);
+    formData.append("extraDetails", extraDetails);
+    formData.append("resume", resumeFile);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/job-search-submit",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      console.log("OpenAI payload response:", response.data);
+    } catch (error) {
+      console.error("Error submitting job search form:", error);
+    }
+  }
+
   if (loading) {
     return (
       <main className="page">
@@ -81,7 +128,7 @@ function JobSearchSetupPage() {
 
         <p>Tell JobSearch AI what kind of job you are looking for.</p>
 
-        <form className="setup-form">
+        <form className="setup-form" onSubmit={handleSubmit}>
           <div className="input-field-container">
             <TextField
               required
@@ -192,10 +239,196 @@ function JobSearchSetupPage() {
               </MenuItem>
             </TextField>
           </div>
-        </form>
+          <div className="input-field-container">
+            <TextField
+              select
+              id="experience-level"
+              label="Experience Level"
+              value={experienceLevel}
+              fullWidth
+              margin="normal"
+              onChange={(event) => setExperienceLevel(event.target.value)}
+              sx={getInputStyles(experienceLevel)}
+              slotProps={{
+                select: {
+                  MenuProps: getDropdownMenuProps(),
+                },
+              }}
+            >
+              <MenuItem sx={dropdownItemStyles} value="entry-level">
+                Entry Level
+              </MenuItem>
 
-        <ResumeDropZone onFileSelected={handleResumeSelected} />
-        <JobSearchTextField></JobSearchTextField>
+              <MenuItem sx={dropdownItemStyles} value="junior">
+                Junior
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="mid-level">
+                Mid-Level
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="senior">
+                Senior
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="lead">
+                Lead
+              </MenuItem>
+            </TextField>
+
+            <TextField
+              select
+              id="target-company"
+              label="Target Company"
+              value={targetCompany}
+              fullWidth
+              margin="normal"
+              onChange={(event) => setTargetCompany(event.target.value)}
+              sx={getInputStyles(targetCompany)}
+              slotProps={{
+                select: {
+                  MenuProps: getDropdownMenuProps(),
+
+                  renderValue: (selectedValue) => {
+                    const selectedCompany = targetCompanies.find(
+                      (company) => company.value === selectedValue
+                    );
+
+                    return selectedCompany ? selectedCompany.label : "";
+                  },
+                },
+              }}
+            >
+            // Build Company Menu
+            {targetCompanies.map((company) => (
+              <MenuItem
+                key={company.value}
+                sx={{
+                  ...dropdownItemStyles,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                }}
+                value={company.value}
+              >
+                {company.icon && (
+                  <img
+                    src={company.icon}
+                    alt={`${company.label} logo`}
+                    style={{
+                      width: "25px",
+                      height: "25px",
+                      objectFit: "contain",
+                      flexShrink: 0,
+                      display: "block",
+                    }}
+                  />
+                )}
+
+                <span
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    lineHeight: 1,
+                  }}
+                >
+                  {company.label}
+                </span>
+              </MenuItem>
+            ))}
+            </TextField>
+
+            <TextField
+              select
+              id="veteran-status"
+              label="Veteran Status"
+              value={veteranStatus}
+              fullWidth
+              margin="normal"
+              onChange={(event) => setVeteranStatus(event.target.value)}
+              sx={getInputStyles(veteranStatus)}
+              slotProps={{
+                select: {
+                  MenuProps: getDropdownMenuProps(),
+                },
+              }}
+            >
+              <MenuItem sx={dropdownItemStyles} value="prefer-not-to-say">
+                Prefer not to say
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="veteran">
+                Veteran
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="active-duty">
+                Active Duty
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="reservist-national-guard">
+                Reservist / National Guard
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="military-spouse">
+                Military Spouse
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="not-applicable">
+                Not Applicable
+              </MenuItem>
+            </TextField>
+
+            <TextField
+              select
+              id="security-clearance"
+              label="Security Clearance"
+              value={securityClearance}
+              fullWidth
+              margin="normal"
+              onChange={(event) => setSecurityClearance(event.target.value)}
+              sx={getInputStyles(securityClearance)}
+              slotProps={{
+                select: {
+                  MenuProps: getDropdownMenuProps(),
+                },
+              }}
+            >
+              <MenuItem sx={dropdownItemStyles} value="none">
+                None
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="public-trust">
+                Public Trust
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="secret">
+                Secret
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="top-secret">
+                Top Secret
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="ts-sci">
+                TS/SCI
+              </MenuItem>
+            </TextField>
+          </div>
+          <ResumeDropZone onFileSelected={handleResumeSelected} />
+
+          <JobSearchTextField
+            value={extraDetails}
+            onChange={setExtraDetails}
+          />
+
+          <Button
+            type="submit"
+            variant="contained"
+            sx={ buttonStyles }
+          >
+            Find Matching Jobs
+          </Button>
+        </form>
       </section>
     </main>
   );

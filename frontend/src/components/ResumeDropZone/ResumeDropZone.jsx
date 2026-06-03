@@ -6,6 +6,7 @@ import "./ResumeDropZone.css";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
 import uploadCloudIcon from "../../assets/upload-cloud.svg";
+import { buttonStyles } from "../../utils/muiStyles";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
     "pdfjs-dist/build/pdf.worker.min.mjs",
@@ -76,79 +77,79 @@ function ResumeDropZone({ onFileSelected }) {
 
         {!selectedFile && (
             <Box
-            {...getRootProps()}
-            className={`resume-dropzone ${isDragActive ? "active" : ""}`}
-            >
-            <input {...getInputProps()} />
+                {...getRootProps()}
+                className={`resume-dropzone ${isDragActive ? "active" : ""}`}
+                >
+                <input {...getInputProps()} />
 
-            <img
-                src={uploadCloudIcon}
-                alt="Upload cloud"
-                className="upload-cloud-icon"
-            />
+                <img
+                    src={uploadCloudIcon}
+                    alt="Upload cloud"
+                    className="upload-cloud-icon"
+                />
 
-            <Typography variant="body2">Accepted file: PDF</Typography>
+                <Typography variant="body2">Accepted file: PDF</Typography>
 
-            <Button
-                type="button"
-                variant="contained"
-                sx={{ mt: 2 }}
-                onClick={open}
-            >
-                Choose File
-            </Button>
+                <Button
+                    type="button"
+                    variant="contained"
+                    sx={ buttonStyles }
+                    onClick={open}
+                >
+                    Choose File
+                </Button>
             </Box>
         )}
 
         {selectedFile && (
             <div className="resume-preview-card">
-            <div className="resume-preview-header">
-                <div className="resume-file-info">
-                <div className="resume-file-icon">📄</div>
+                <div className="resume-preview-header">
+                    <div className="resume-file-info">
+                        <div className="resume-file-icon">📄</div>
 
-                <div>
-                    <h4>{selectedFile.name}</h4>
-                    <p>Uploaded today</p>
+                        <div>
+                            <h4>{selectedFile.name}</h4>
+                            <p>Uploaded today</p>
+                        </div>
+                    </div>
+
+                    <div className="resume-check-icon">✓</div>
                 </div>
+
+                <div className="resume-preview-body">
+                    <div className="resume-pdf-preview">
+                    <Document
+                        file={previewUrl}
+                        loading={
+                        <p className="resume-preview-message">Loading preview...</p>
+                        }
+                        error={
+                        <p className="resume-preview-message">
+                            Could not load PDF preview.
+                        </p>
+                        }
+                    >
+                        <Page
+                        pageNumber={1}
+                        width={520}
+                        renderTextLayer={false}
+                        renderAnnotationLayer={false}
+                        />
+                    </Document>
+                    </div>
                 </div>
 
-                <div className="resume-check-icon">✓</div>
-            </div>
-
-            <div className="resume-preview-body">
-                <div className="resume-pdf-preview">
-                <Document
-                    file={previewUrl}
-                    loading={
-                    <p className="resume-preview-message">Loading preview...</p>
-                    }
-                    error={
-                    <p className="resume-preview-message">
-                        Could not load PDF preview.
-                    </p>
-                    }
-                >
-                    <Page
-                    pageNumber={1}
-                    width={520}
-                    renderTextLayer={false}
-                    renderAnnotationLayer={false}
-                    />
-                </Document>
+                <div className="resume-preview-actions single-action">
+                    <Button
+                    type="button"
+                    variant="contained"
+                    fullWidth
+                    onClick={removeResume}
+                    sx={{background: "var(--btn)"}}
+                    >
+                    Remove
+                    </Button>
                 </div>
-            </div>
-
-            <div className="resume-preview-actions single-action">
-                <Button
-                type="button"
-                variant="contained"
-                fullWidth
-                onClick={removeResume}
-                sx={{background: "var(--btn)"}}
-                >
-                Remove
-                </Button>
-            </div>
             </div>
         )}
         </div>

@@ -1,21 +1,8 @@
-/*
-    Express.js is a backend framework for Node.js.
-
-    It helps you build a server that can:
-    - Listen for requests from the browser or frontend
-    - Create API routes like /api/landing
-    - Send responses back as text, JSON, HTML, etc.
-
-    In this project:
-    - React will be the frontend
-    - Express will be the backend
-    - React will ask Express for data
-    - Express will return that data as JSON
-*/
-
-// Import Express.
 // require("express") loads the Express package from node_modules.
 const express = require("express");
+
+// For Express, you need a package called multer to receive uploaded files.
+const multer = require("multer");
 
 // Import CORS.
 // CORS allows your React frontend to make requests to this Express backend.
@@ -29,16 +16,6 @@ require("dotenv").config();
 // app is now your backend/server object.
 const app = express();
 
-/*
-    app.use() adds middleware.
-
-    Middleware is code that runs between:
-    1. The request coming in
-    2. The response going back out
-
-    Think of middleware as "server helpers."
-*/
-
 // Enable CORS so another app, like React on localhost:5173,
 // can call this backend on localhost:5000.
 app.use(cors());
@@ -46,6 +23,19 @@ app.use(cors());
 // Allow Express to understand JSON data in request bodies.
 // This will matter later when React sends data to the backend.
 app.use(express.json());
+
+// Multer handles multipart/form-data.
+// This is needed because React is sending FormData with a PDF file.
+const upload = multer({
+    storage: multer.memoryStorage(),
+    fileFilter: (req, file, cb) => {
+        if (file.mimetype !== "application/pdf") {
+        return cb(new Error("Only PDF files are allowed"));
+        }
+
+        cb(null, true);
+    },
+});
 
 /*
     This creates a GET route for the homepage of the backend.
@@ -64,20 +54,11 @@ app.get("/", (req, res) => {
     res.send("JobSearch AI backend is running");
 });
 
-/*
-    This creates a GET API route.
-
-    Route:
-    GET http://localhost:5000/api/landing
-
-    This route sends landing page data to the frontend.
-    Later, React will call this route using Axios.
-*/
 app.get("/api/landing", (req, res) => {
   // Send JSON data back to the frontend.
     res.json({
     appName: "JobSearch AI",
-    appIcon: "./icon.svg",
+    appIcon: "./images/icons/icon.svg",
     headline: "AI-powered job search, resume matching, and application tracking.",
     subheadline:
         "Search job opportunities, save listings, analyze resume fit, generate tailored materials, and organize your job search workflow.",
@@ -103,11 +84,6 @@ app.get("/api/job-search-setup", (req, res) => {
 });
 
 /*
-    Get the port number from the .env file.
-
-    process.env.PORT means:
-    "Look inside the environment variables for a variable named PORT."
-
     If PORT does not exist, use 5000 instead.
 */
 const PORT = process.env.PORT || 5000;
@@ -120,4 +96,70 @@ const PORT = process.env.PORT || 5000;
 */
 app.listen(PORT, () => {
     console.log(`JobSearch AI backend running on http://localhost:${PORT}`);
+});
+
+
+app.post("/api/job-search-submit", upload.single("resume"), async (req, res) => {
+    console.log("job-search-submit backend called!")
+    // try {
+    //     const jobTitle = req.body.jobTitle;
+    //     const location = req.body.location;
+    //     const salaryRange = req.body.salaryRange;
+    //     const workType = req.body.workType;
+    //     const extraDetails = req.body.extraDetails;
+
+    //     const resumeFile = req.file;
+
+    //     if (!resumeFile) {
+    //         return res.status(400).json({
+    //             error: "Resume PDF is required",
+    //         });
+    //     }
+
+    //     console.log("Job Title:", jobTitle);
+    //     console.log("Location:", location);
+    //     console.log("Salary Range:", salaryRange);
+    //     console.log("Work Type:", workType);
+    //     console.log("Extra Details:", extraDetails);
+
+    //     console.log("Resume Original Name:", resumeFile.originalname);
+    //     console.log("Resume MIME Type:", resumeFile.mimetype);
+    //     console.log("Resume Size:", resumeFile.size);
+    //     console.log("Resume Buffer:", resumeFile.buffer);
+
+    //     const openAiPayload = {
+    //         jobTitle: jobTitle,
+    //         location: location,
+    //         salaryRange: salaryRange,
+    //         workType: workType,
+    //         extraDetails: extraDetails,
+    //         resume: {
+    //             originalName: resumeFile.originalname,
+    //             mimeType: resumeFile.mimetype,
+    //             size: resumeFile.size,
+    //             buffer: resumeFile.buffer,
+    //         },
+    //     };
+
+    //     console.log("Payload ready for OpenAI:", openAiPayload);
+
+    //     res.json({
+    //         message: "Job search setup submitted successfully",
+    //         receivedData: {
+    //             jobTitle,
+    //             location,
+    //             salaryRange,
+    //             workType,
+    //             extraDetails,
+    //             resumeFileName: resumeFile.originalname,
+    //             resumeFileSize: resumeFile.size,
+    //             },
+    //         });
+    // } catch (error) {
+    //     console.error("Error submitting job search setup:", error);
+
+    //     res.status(500).json({
+    //     error: "Something went wrong while submitting the job search setup",
+    //     });
+    // }
 });

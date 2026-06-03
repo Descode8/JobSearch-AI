@@ -8,6 +8,7 @@ export function getInputStyles(value) {
     return {
         "& .MuiOutlinedInput-root": {
         borderRadius: "10px",
+        backgroundColor: "var(--social-bg)",
 
         "& fieldset": {
             borderColor: isFilled ? filledColor : borderColor,
@@ -61,11 +62,13 @@ export function getDropdownMenuProps() {
         slotProps: {
             paper: {
                 sx: {
-                    backgroundColor: "#07142d",
+                    backgroundColor: "var(--text)",
                     border: ".5px solid var(--btn)",
                     borderRadius: "12px",
                     boxShadow: "0 18px 40px rgba(0, 0, 0, 0.45)",
-                    overflow: "hidden",
+                    overflow: "auto",
+                    height: "max-content",
+                    maxHeight: "250px",
                 },
             },
         },
@@ -90,5 +93,20 @@ export const dropdownItemStyles = {
 
     "&.Mui-selected:hover": {
         backgroundColor: "rgba(39, 174, 96, 0.35)",
+    },
+};
+
+export const buttonStyles = { 
+    mt: 2, 
+    width: "100%",
+    maxWidth: "fit-content",
+    backgroundColor: "var(--btn)",
+    borderRadius: "10px",
+    textTransform: "none",
+    padding: "10px 25px",
+    fontSize: "16px",
+    fontWeight: 800,
+    "&:hover": {
+        backgroundColor: "var(--btn-hover)",
     },
 };

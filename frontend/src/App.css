@@ -82,10 +82,11 @@
 
 .primary-button,
 .secondary-button {
-  padding: 10px 20px;
+  padding: 10px 25px;
+  height: 48px;
   border-radius: 10px;
   font-size: 16px;
-  font-weight: 800;
+  font-weight: 700;
   cursor: pointer;
   text-decoration: none;
 }
