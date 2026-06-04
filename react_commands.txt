@@ -1,7 +1,7 @@
 Run React live dev server
 -------------------------
 
-cd frontend
+cd client
 npm run dev
 
 Use this while coding React.
@@ -12,28 +12,28 @@ Common URL:
 http://localhost:5173
 
 
-Run Express backend server
+Run Express server server
 --------------------------
 
-cd backend
+cd server
 node server.js
 
-Use this to start your backend API/server.
+Use this to start your server API/server.
 
 
-Run frontend and backend together
+Run client and server together
 ---------------------------------
 
 Open two terminals.
 
 Terminal 1:
 
-cd backend
+cd server
 node server.js
 
 Terminal 2:
 
-cd frontend
+cd client
 npm run dev
 
 
@@ -48,7 +48,7 @@ When to use npm run preview
 
 Only use this after building the app.
 
-cd frontend
+cd client
 npm run build
 npm run preview
 
@@ -56,17 +56,17 @@ Important:
 npm run preview does not work like the live dev server.
 If you make code changes, run npm run build again before previewing.
 """
-installs the library that lets a React app have multiple pages/routes (MUST DO THIS IN FRONTEND)
+installs the library that lets a React app have multiple pages/routes (MUST DO THIS IN client)
 ------------------------------------------------------------------------------------------------
 npm install react-router-dom 
 
 Install Axios
 -------------
 
-cd frontend
+cd client
 npm install axios
 
-Axios is used to send HTTP requests from React to a backend API.
+Axios is used to send HTTP requests from React to a server API.
 
 Example:
 

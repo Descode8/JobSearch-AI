@@ -6,9 +6,9 @@ Install Redux
 
 For modern React apps, use Redux Toolkit.
 
-Run this inside your React frontend folder:
+Run this inside your React client folder:
 
-cd frontend
+cd client
 npm install @reduxjs/toolkit react-redux
 
 What is Redux?
@@ -511,13 +511,13 @@ Redux and Axios
 
 Redux and Axios are different tools.
 
-Axios gets data from a backend.
+Axios gets data from a server.
 
 Redux stores shared data for the app.
 
 Example flow:
 
-Axios gets user data from backend
+Axios gets user data from server
         ↓
 Redux stores the user data
         ↓
@@ -662,9 +662,9 @@ React components use useSelector to read from Redux.
 
 React components use useDispatch to update Redux.
 
-Axios gets data from a backend.
+Axios gets data from a server.
 
-Redux stores data inside your frontend app.
+Redux stores data inside your client app.
 
 Redux is not always needed, but it is useful for larger apps with shared state.
 ```

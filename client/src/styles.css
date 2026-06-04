@@ -5,9 +5,17 @@
   --border: #e5e4e7;
   --code-bg: #f4f3ec;
   --accent: #aa3bff;
-  --btn: #004bd6;
-  --btn-hover: #3d6eca;
+  --btn: oklch(48.8% 0.243 264.376);
+  --btn-hover: #4f3bd6;
   --input-filled: #27ae60;
+  --btn-gradient-border: linear-gradient(
+    90deg,
+    #1d4ed8,
+    #c026d3,
+    #6b21a8,
+    #22c55e
+  );
+  --btn-hover-shadow: 0 0 18px rgba(155, 92, 255, 0.35);
   --accent-bg: rgba(170, 59, 255, 0.1);
   --accent-border: rgba(170, 59, 255, 0.5);
   --social-bg: oklch(55.4% 0.046 257.417);
@@ -298,3 +306,4 @@ a {
   position: relative;
   z-index: 1;
 }
+

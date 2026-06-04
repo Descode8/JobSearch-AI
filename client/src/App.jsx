@@ -1,61 +1,29 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import JobSearchSetupPage from "./components/JobSearchSetupPage/JobSearchPageSetup.jsx";
 import axios from "axios";
-import "././App.css";
+import "./App.css";
 import "./styles.css";
+import Button from "@mui/material/Button";
+import { buttonStyles } from "./utils/muiStyles.js";
 
 {/* App is your root React component. */}
 {/* main.jsx renders this component into <div id="root"></div> in index.html. */}
 function LandingPage() {
-  /*
-    landingData stores the data returned from your Express backend.
+  const navigate = useNavigate();
 
-    Starting value is null because when the page first loads,
-    we do not have the backend data yet.
-  */
   const [landingData, setLandingData] = useState(null);
-
-  /*
-    loading stores whether the LandingPage is still waiting for data.
-
-    Starting value is true because when the page first loads,
-    we immediately need to fetch data from the backend.
-  */
   const [loading, setLoading] = useState(true);
 
-  /*
-    useEffect runs after the component renders.
 
-    The empty array [] means:
-    "Only run this one time when the component first loads."
-
-    This is similar to saying:
-    "When the page opens, go get the landing page data."
-  */
   useEffect(() => {
     getLandingData();
   }, []);
 
-  /*
-    This function calls the Express backend.
 
-    async means this function can use await.
-    await means wait for the request to finish before moving on.
-  */
   async function getLandingData() {
     try {
-      /*
-        Axios sends a GET request to your Express route:
 
-        Backend route:
-        app.get("/api/landing", ...)
-
-        Full URL:
-        http://localhost:5000/api/landing
-
-        This should return JSON data from your backend.
-      */
       const response = await axios.get("http://localhost:5000/api/landing");
 
         // setLandingData saves that object into React state.
@@ -73,8 +41,8 @@ function LandingPage() {
         prints the error in the browser console.
 
         Common causes:
-        - Backend server is not running
-        - Wrong backend URL
+        - server server is not running
+        - Wrong server URL
         - CORS issue
         - Express route does not exist
       */
@@ -105,7 +73,7 @@ function LandingPage() {
 
   /*
     If loading is done but landingData is still null,
-    that means the backend request probably failed.
+    that means the server request probably failed.
   */
   if (!landingData) {
     return (
@@ -125,7 +93,7 @@ function LandingPage() {
     <main className="page">
       {/* Navbar section */}
       <nav className="navbar">
-        {/* This value comes from the backend */}
+        {/* This value comes from the server */}
         <div className="app-name-icon-container">
           <h2>{landingData.appName}</h2>
           <img src={landingData.appIcon} alt={`${landingData.appName} icon`} />
@@ -141,18 +109,23 @@ function LandingPage() {
         <div className="hero-text">
           <p className="eyebrow">AI Career Assistant</p>
 
-          {/* This headline comes from the backend */}
+          {/* This headline comes from the server */}
           <h1>{landingData.headline}</h1>
 
-          {/* This subheadline comes from the backend */}
+          {/* This subheadline comes from the server */}
           <p>{landingData.subheadline}</p>
-
-          <div className="button-row">
-            <Link to="/job-search-setup" className="primary-button">
+          
+            <Button
+              type="button"
+              variant="contained"
+              sx={{
+                            ...buttonStyles, 
+                            width: "100%",
+                            maxWidth: "300px"}}
+              onClick={() => navigate("/job-search-setup")}
+            >
               Get Started
-            </Link>
-            <button className="secondary-button">View Demo</button>
-          </div>
+            </Button>
         </div>
 
         {/* Right-side hero card */}
@@ -174,7 +147,7 @@ function LandingPage() {
 
         <div className="features-grid">
           {/*
-            landingData.features is an array from the backend.
+            landingData.features is an array from the server.
 
             Example:
             [

@@ -145,7 +145,7 @@ function ResumeDropZone({ onFileSelected }) {
                     variant="contained"
                     fullWidth
                     onClick={removeResume}
-                    sx={{background: "var(--btn)"}}
+                    sx={buttonStyles}
                     >
                     Remove
                     </Button>

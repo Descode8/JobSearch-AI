@@ -4,25 +4,25 @@ Axios Guide
 What is Axios?
 --------------
 
-Axios is a JavaScript library used to send HTTP requests from your frontend to a backend API.
+Axios is a JavaScript library used to send HTTP requests from your client to a server API.
 
 In React, Axios is commonly used to:
-- Get data from a backend
-- Send form data to a backend
+- Get data from a server
+- Send form data to a server
 - Update records
 - Delete records
 - Communicate with Express, Flask, Django, etc.
 
 Example:
-React frontend  --->  Axios request  --->  Express backend/API
+React client  --->  Axios request  --->  Express server/API
 
 
 Install Axios
 -------------
 
-Run this inside your React frontend folder:
+Run this inside your React client folder:
 
-cd frontend
+cd client
 npm install axios
 
 
@@ -77,15 +77,15 @@ What is happening?
 ```jsx
 axios.get("http://localhost:5000/api/foods")
 
-This sends a GET request to the backend.
+This sends a GET request to the server.
 
 .then((response) => {
   setFoods(response.data);
 })
 
 {/* This runs if the request succeeds.
-{/* response.data contains the data sent back from the backend.
-setFoods(response.data) stores the backend data inside React state.
+{/* response.data contains the data sent back from the server.
+setFoods(response.data) stores the server data inside React state.
 
 .catch((error) => {
   console.error("Error fetching foods:", error);
@@ -177,7 +177,7 @@ Axios works well with:
 - useState
 - forms
 - login systems
-- backend APIs
+- server APIs
 
 
 4. Can send GET, POST, PUT, PATCH, and DELETE requests
@@ -263,7 +263,7 @@ If your React app is running on:
 
 http://localhost:5173
 
-And your Express backend is running on:
+And your Express server is running on:
 
 http://localhost:5000
 
@@ -280,14 +280,14 @@ Axios connects them.
 Common Error
 ------------
 
-If you see a CORS error, your Express backend may need CORS enabled.
+If you see a CORS error, your Express server may need CORS enabled.
 
-Install CORS in the backend:
+Install CORS in the server:
 
-cd backend
+cd server
 npm install cors
 
-Then in backend/server.js:
+Then in server/server.js:
 ```js
 const express = require("express");
 const cors = require("cors");
@@ -313,14 +313,14 @@ app.listen(5000, () => {
 Simple Full Example
 -------------------
 
-Backend:
+server:
 
-cd backend
+cd server
 node server.js
 
-Frontend:
+client:
 
-cd frontend
+cd client
 npm run dev
 
 Axios request in React:
@@ -337,7 +337,7 @@ axios.get("http://localhost:5000/api/foods")
 Summary
 -------
 
-Axios is used to send requests from your React frontend to your backend server.
+Axios is used to send requests from your React client to your server server.
 
 Use Axios when your React app needs to:
 - Load data
@@ -346,4 +346,4 @@ Use Axios when your React app needs to:
 - Register users
 - Update data
 - Delete data
-- Talk to an Express, Flask, Django, or other backend API
+- Talk to an Express, Flask, Django, or other server API

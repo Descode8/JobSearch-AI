@@ -7,7 +7,7 @@ import {
   getDropdownMenuProps,
   dropdownItemStyles,
   buttonStyles,
-} from "../../utils/muiStyles";
+} from "../../utils/muiStyles.js";
 import { targetCompanies } from "../../utils/companyOptions.js";
 
 import TextField from "@mui/material/TextField";

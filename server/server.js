@@ -2,7 +2,7 @@
 const express = require("express");
 
 // Import CORS.
-// CORS allows your React frontend to make requests to this Express backend.
+// CORS allows your React client to make requests to this Express server.
 const cors = require("cors");
 
 // Load environment variables from the .env file.
@@ -14,18 +14,18 @@ const jSearchRoutes = require("./routes/jSearchRoute");
 const resumeRoutes = require("./routes/resumeRoute");
 
 // Create an Express application.
-// app is now your backend/server object.
+// app is now your server/server object.
 const app = express();
 
 // Enable CORS so another app, like React on localhost:5173,
-// can call this backend on localhost:5000.
+// can call this server on localhost:5000.
 app.use(cors());
 
 // Allow Express to understand JSON data in request bodies.
 app.use(express.json());
 
 app.get("/", (req, res) => {
-    res.send("JobSearch AI backend is running");
+    res.send("JobSearch AI server is running");
 });
 
 app.get("/api/landing", (req, res) => {
@@ -60,5 +60,5 @@ app.use("/api/resume", resumeRoutes);
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-    console.log(`JobSearch AI backend running on http://localhost:${PORT}`);
+    console.log(`JobSearch AI server running on http://localhost:${PORT}`);
 });
