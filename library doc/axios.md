@@ -83,15 +83,15 @@ This sends a GET request to the backend.
   setFoods(response.data);
 })
 
-// This runs if the request succeeds.
-// response.data contains the data sent back from the backend.
+{/* This runs if the request succeeds.
+{/* response.data contains the data sent back from the backend.
 setFoods(response.data) stores the backend data inside React state.
 
 .catch((error) => {
   console.error("Error fetching foods:", error);
 })
 
-// This runs if the request fails.
+{/* This runs if the request fails.
 ```
 
 Basic POST Request

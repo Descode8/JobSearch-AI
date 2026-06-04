@@ -4,8 +4,10 @@ import { getInputStyles } from "../../utils/muiStyles";
 import "../../styles.css";
 import "./JobSearchTextField.css";
 
-function JobSearchTextField () {
-    const [showText, setText] = useState("");
+function JobSearchTextField (props) {
+    {/* Receives props from the parent component (JobSearchPageSetup) */}
+    const value = props.value;
+    const onChange = props.onChange;
 
     return (
         <div className="job-search-text-field-container">
@@ -13,7 +15,7 @@ function JobSearchTextField () {
             <p>
                 I can use any extra details you share to improve your job search results,
                 such as companies you are interested in, industries you want to target, roles
-                you want to avoid, your preferred schedule, career goals, or anything important
+                you want to avoid, your preferred schedule, career goals, certain benefits, or anything important
                 that may not be clear from your resume.
             </p>
             <TextField
@@ -26,9 +28,9 @@ function JobSearchTextField () {
                 fullWidth
                 margin="normal"
                 variant="outlined"
-                value={showText}
-                onChange={(event) => setText(event.target.value)}
-                sx= { getInputStyles(showText) }
+                value={value}
+                onChange={(event) => onChange(event.target.value)}
+                sx= { getInputStyles(value) }
             />
         </div>
     )

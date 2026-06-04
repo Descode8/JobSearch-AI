@@ -5,8 +5,8 @@ import axios from "axios";
 import "././App.css";
 import "./styles.css";
 
-// App is your root React component.
-// main.jsx renders this component into <div id="root"></div> in index.html.
+{/* App is your root React component. */}
+{/* main.jsx renders this component into <div id="root"></div> in index.html. */}
 function LandingPage() {
   /*
     landingData stores the data returned from your Express backend.

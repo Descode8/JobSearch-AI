@@ -6,7 +6,7 @@ import {
   getInputStyles,
   getDropdownMenuProps,
   dropdownItemStyles,
-  buttonStyles
+  buttonStyles,
 } from "../../utils/muiStyles";
 import { targetCompanies } from "../../utils/companyOptions.js";
 
@@ -30,7 +30,7 @@ function JobSearchSetupPage() {
   const [targetCompany, setTargetCompany] = useState("");
   const [veteranStatus, setVeteranStatus] = useState("");
   const [securityClearance, setSecurityClearance] = useState("");
-  const [extraDetails, setExtraDetails] = useState(""); 
+  const [extraDetails, setExtraDetails] = useState("");
 
   // Resume State
   const [resumeFile, setResumeFile] = useState(null);
@@ -72,32 +72,37 @@ function JobSearchSetupPage() {
       return;
     }
 
-    // OpenAI Payload
-    const formData = new FormData();
-
-    formData.append("jobTitle", jobTitle);
-    formData.append("location", location);
-    formData.append("salaryRange", salaryRange);
-    formData.append("workType", workType);
-    formData.append("experienceLevel", experienceLevel);
-    formData.append("targetCompany", targetCompany);
-    formData.append("veteranStatus", veteranStatus);
-    formData.append("securityClearance", securityClearance);
-    formData.append("extraDetails", extraDetails);
-    formData.append("resume", resumeFile);
-
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/job-search-submit",
-        formData,
+      // Request 1: Send job search data only.
+      // This route will eventually call the JSearch API.
+      const jobSearchResponse = await axios.post(
+        "http://localhost:5000/api/jobs/search",
         {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
+          jobTitle,
+          location,
+          salaryRange,
+          workType,
+          experienceLevel,
+          targetCompany,
+          veteranStatus,
+          securityClearance,
+          extraDetails,
         }
       );
 
-      console.log("OpenAI payload response:", response.data);
+      console.log("Job search response:", jobSearchResponse.data);
+
+      // Request 2: Send resume file only.
+      // This route will eventually store or parse the resume.
+      const resumeFormData = new FormData();
+      resumeFormData.append("resume", resumeFile);
+
+      const resumeUploadResponse = await axios.post(
+        "http://localhost:5000/api/resumes/upload",
+        resumeFormData
+      );
+
+      console.log("Resume upload response:", resumeUploadResponse.data);
     } catch (error) {
       console.error("Error submitting job search form:", error);
     }
@@ -133,8 +138,8 @@ function JobSearchSetupPage() {
             <TextField
               required
               id="job-title"
-              label="Job Title, Keywords, or Company"
-              placeholder="Job Title, Keywords, or Company"
+              label="Job Title"
+              placeholder="Job Title"
               variant="outlined"
               margin="normal"
               fullWidth
@@ -146,7 +151,7 @@ function JobSearchSetupPage() {
             <TextField
               required
               id="location"
-              label='City, State, Zip-Code, or "Remote"'
+              label="City, State"
               type="text"
               fullWidth
               margin="normal"
@@ -214,7 +219,7 @@ function JobSearchSetupPage() {
               required
               select
               id="work-type"
-              label="Select Work Type"
+              label="Work Type"
               value={workType}
               fullWidth
               margin="normal"
@@ -239,6 +244,7 @@ function JobSearchSetupPage() {
               </MenuItem>
             </TextField>
           </div>
+
           <div className="input-field-container">
             <TextField
               select
@@ -299,43 +305,43 @@ function JobSearchSetupPage() {
                 },
               }}
             >
-            // Build Company Menu
-            {targetCompanies.map((company) => (
-              <MenuItem
-                key={company.value}
-                sx={{
-                  ...dropdownItemStyles,
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "10px",
-                }}
-                value={company.value}
-              >
-                {company.icon && (
-                  <img
-                    src={company.icon}
-                    alt={`${company.label} logo`}
-                    style={{
-                      width: "25px",
-                      height: "25px",
-                      objectFit: "contain",
-                      flexShrink: 0,
-                      display: "block",
-                    }}
-                  />
-                )}
-
-                <span
-                  style={{
+              {/* Build Company Menu */}
+              {targetCompanies.map((company) => (
+                <MenuItem
+                  key={company.value}
+                  sx={{
+                    ...dropdownItemStyles,
                     display: "flex",
                     alignItems: "center",
-                    lineHeight: 1,
+                    gap: "10px",
                   }}
+                  value={company.value}
                 >
-                  {company.label}
-                </span>
-              </MenuItem>
-            ))}
+                  {company.icon && (
+                    <img
+                      src={company.icon}
+                      alt={`${company.label} logo`}
+                      style={{
+                        width: "25px",
+                        height: "25px",
+                        objectFit: "contain",
+                        flexShrink: 0,
+                        display: "block",
+                      }}
+                    />
+                  )}
+
+                  <span
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      lineHeight: 1,
+                    }}
+                  >
+                    {company.label}
+                  </span>
+                </MenuItem>
+              ))}
             </TextField>
 
             <TextField
@@ -414,18 +420,16 @@ function JobSearchSetupPage() {
               </MenuItem>
             </TextField>
           </div>
+
           <ResumeDropZone onFileSelected={handleResumeSelected} />
 
+          {/* Pass props from the parent component to the child component */}
           <JobSearchTextField
             value={extraDetails}
             onChange={setExtraDetails}
           />
 
-          <Button
-            type="submit"
-            variant="contained"
-            sx={ buttonStyles }
-          >
+          <Button type="submit" variant="contained" sx={buttonStyles}>
             Find Matching Jobs
           </Button>
         </form>
