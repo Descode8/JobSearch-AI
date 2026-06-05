@@ -21,13 +21,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease-in-out;
-    box-shadow: var(--btn-hover-shadow);
+    /* box-shadow: var(--btn-hover-shadow); */
     transform: translateY(-1px);
     overflow: hidden;
 }
 
-.voice-input-button::before {
+.voice-input-button:hover::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -61,7 +60,6 @@
 
 .voice-input-icon {
     width: 25px;
-    /* height: 45px; */
     object-fit: contain;
     display: block;
 }

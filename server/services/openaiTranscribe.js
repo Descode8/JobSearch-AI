@@ -8,7 +8,7 @@ const openai = new OpenAI({
 async function transcribeAudio(filePath) {
     const transcription = await openai.audio.transcriptions.create({
         file: fs.createReadStream(filePath),
-        model: "gpt-4o-transcribe",
+        model: process.env.OPENAI_TRANSCRIBE_MODEL,
         response_format: "text",
     });
 

@@ -1,12 +1,22 @@
 const express = require("express");
 const multer = require("multer");
+const path = require("path");
 const fs = require("fs");
 const transcribeAudio = require("../services/openaiTranscribe");
-
 const router = express.Router();
 
+const storage = multer.diskStorage({
+    destination: "uploads/",
+    filename: (req, file, cb) => {
+        const ext = path.extname(file.originalname);
+        const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1e9)}${ext}`;
+
+        cb(null, uniqueName);
+    },
+});
+
 const upload = multer({
-    dest: "uploads/",
+    storage: storage,
 });
 
 router.post("/", upload.single("audio"), async (req, res) => {

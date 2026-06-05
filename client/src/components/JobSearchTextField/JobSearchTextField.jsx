@@ -35,7 +35,8 @@ function JobSearchTextField(props) {
             <div className="extra-details-input-wrapper">
                 <TextField
                     id="fullWidth"
-                    label="Type Here"
+                    label="Extra Details"
+                    placeholder="Type or Record Voice Here..."
                     type="text"
                     multiline
                     minRows={5}
