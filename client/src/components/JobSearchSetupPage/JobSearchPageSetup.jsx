@@ -131,7 +131,7 @@ function JobSearchSetupPage() {
           <h1>{jobSearchSetupPageData.pageTitle}</h1>
         </div>
 
-        <p>Tell JobSearch AI what kind of job you are looking for.</p>
+        <p>Let's get you set up! Please fill out all of the fields below...</p>
 
         <form className="setup-form" onSubmit={handleSubmit}>
           <div className="input-field-container">

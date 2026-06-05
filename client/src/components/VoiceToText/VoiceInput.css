@@ -1,0 +1,74 @@
+.voice-input-container {
+    position: absolute;
+    left: 8px;
+    bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 2;
+    /* border: 2px solid green; */
+}
+
+.voice-input-button {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease-in-out;
+    box-shadow: var(--btn-hover-shadow);
+    transform: translateY(-1px);
+    overflow: hidden;
+}
+
+.voice-input-button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    padding: 2px;
+    background: var(--btn-gradient-border);
+    pointer-events: none;
+
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+
+    mask-composite: exclude;
+    -webkit-mask-composite: xor;
+}
+
+.voice-input-button:hover {
+    background: linear-gradient(#050914, #050914);
+    box-shadow: var(--btn-hover-shadow);
+    transform: translateY(-1px);
+}
+
+/* .voice-input-button.recording {
+    border-color: #ff4d4d;
+    background-color: #ff4d4d;
+} */
+
+.voice-input-icon {
+    width: 25px;
+    /* height: 45px; */
+    object-fit: contain;
+    display: block;
+}
+
+.voice-input-status {
+    margin: 0;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+}

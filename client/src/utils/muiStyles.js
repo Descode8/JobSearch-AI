@@ -124,7 +124,7 @@ export const buttonStyles = {
     border: "2px solid transparent",
     borderRadius: "10px",
     textTransform: "none",
-    padding: "10px 25px",
+    padding: "8px 25px",
     fontSize: "16px",
     fontWeight: 800,
     transition: "transform 0.2s ease, box-shadow 0.2s ease",

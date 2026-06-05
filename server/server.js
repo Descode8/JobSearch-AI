@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 // require("express") loads the Express package from node_modules.
 const express = require("express");
 
@@ -5,13 +7,10 @@ const express = require("express");
 // CORS allows your React client to make requests to this Express server.
 const cors = require("cors");
 
-// Load environment variables from the .env file.
-// Example: PORT=5000
-require("dotenv").config();
-
 // Import routes.
 const jSearchRoutes = require("./routes/jSearchRoute");
 const resumeRoutes = require("./routes/resumeRoute");
+const openaiTranscribeRoute = require("./routes/openaiTranscribeRoute");
 
 // Create an Express application.
 // app is now your server/server object.
@@ -56,6 +55,7 @@ app.get("/api/job-search-setup", (req, res) => {
 // Route files.
 app.use("/api/jobs", jSearchRoutes);
 app.use("/api/resume", resumeRoutes);
+app.use("/api/transcribe", openaiTranscribeRoute);
 
 const PORT = process.env.PORT || 5000;
 
