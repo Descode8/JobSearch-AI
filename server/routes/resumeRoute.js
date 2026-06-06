@@ -13,13 +13,14 @@ router.post("/upload", upload.single("resume"), async (req, res) => {
             });
         }
 
-        console.log("Resume file received:", {
-            originalName: resumeFile.originalname,
-            mimeType: resumeFile.mimetype,
-            size: resumeFile.size,
-        });
+        // console.log("Resume file received:", {
+        //     originalName: resumeFile.originalname,
+        //     mimeType: resumeFile.mimetype,
+        //     size: resumeFile.size,
+        // });
 
         res.json({
+            success: true,
             message: "Resume uploaded successfully",
             resume: {
                 originalName: resumeFile.originalname,

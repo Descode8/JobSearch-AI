@@ -16,21 +16,29 @@ import Button from "@mui/material/Button";
 
 import ResumeDropZone from "../ResumeDropZone/ResumeDropZone.jsx";
 import JobSearchTextField from "../JobSearchTextField/JobSearchTextField.jsx";
+import Notification from "../Notification/Notification.jsx";
 
 function JobSearchSetupPage() {
   const [jobSearchSetupPageData, setJobSearchSetupPageData] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const [notification, setNotification] = useState("")
+
   // Input Field States
-  const [jobTitle, setJobTitle] = useState("");
-  const [location, setLocation] = useState("");
+  const [jobTitle, setJobTitle]       = useState("");
+  const [location, setLocation]       = useState("");
   const [salaryRange, setSalaryRange] = useState("");
-  const [workType, setWorkType] = useState("");
-  const [experienceLevel, setExperienceLevel] = useState("");
-  const [targetCompany, setTargetCompany] = useState("");
-  const [veteranStatus, setVeteranStatus] = useState("");
+  const [workType, setWorkType]       = useState("");
+  const [distance, setDistance]       = useState("");
+  
+  const [education, setEducation]                   = useState("");
+  const [experienceLevel, setExperienceLevel]     = useState("");
+  const [targetCompany, setTargetCompany]         = useState("");
+  const [veteranStatus, setVeteranStatus]         = useState("");
   const [securityClearance, setSecurityClearance] = useState("");
-  const [extraDetails, setExtraDetails] = useState("");
+
+
+  const [extraDetails, setExtraDetails]           = useState("");
 
   // Resume State
   const [resumeFile, setResumeFile] = useState(null);
@@ -45,8 +53,6 @@ function JobSearchSetupPage() {
       const response = await axios.get(
         "http://localhost:5000/api/job-search-setup"
       );
-
-      console.log("setup page data:", response.data);
 
       setJobSearchSetupPageData(response.data);
       setLoading(false);
@@ -78,19 +84,19 @@ function JobSearchSetupPage() {
       const jobSearchResponse = await axios.post(
         "http://localhost:5000/api/jobs/search",
         {
-          jobTitle,
-          location,
-          salaryRange,
-          workType,
-          experienceLevel,
-          targetCompany,
-          veteranStatus,
-          securityClearance,
-          extraDetails,
+        jobTitle,
+        location,
+        salaryRange,
+        workType,
+        distance,
+        education,
+        experienceLevel,
+        targetCompany,
+        veteranStatus,
+        securityClearance,
+        extraDetails,
         }
       );
-
-      console.log("Job search response:", jobSearchResponse.data);
 
       // Request 2: Send resume file only.
       // This route will eventually store or parse the resume.
@@ -98,13 +104,19 @@ function JobSearchSetupPage() {
       resumeFormData.append("resume", resumeFile);
 
       const resumeUploadResponse = await axios.post(
-        "http://localhost:5000/api/resumes/upload",
+        "http://localhost:5000/api/resume/upload",
         resumeFormData
       );
+
+      // Show notification on UI
+      jobSearchResponse.data.success && resumeUploadResponse.data.success
+        ? setNotification("success")
+        : setNotification("error");
 
       console.log("Resume upload response:", resumeUploadResponse.data);
     } catch (error) {
       console.error("Error submitting job search form:", error);
+      setNotification("error");
     }
   }
 
@@ -127,10 +139,12 @@ function JobSearchSetupPage() {
   return (
     <main className="page">
       <section className="setup-page">
+
         <div className="page-title">
           <h1>{jobSearchSetupPageData.pageTitle}</h1>
         </div>
 
+        <Notification type={notification} />
         <p>Let's get you set up! Please fill out all of the fields below...</p>
 
         <form className="setup-form" onSubmit={handleSubmit}>
@@ -160,8 +174,77 @@ function JobSearchSetupPage() {
               sx={getInputStyles(location)}
             />
 
+                        <TextField
+              required
+              select
+              id="work-type"
+              label="Work Type"
+              value={workType}
+              fullWidth
+              margin="normal"
+              onChange={(event) => setWorkType(event.target.value)}
+              sx={getInputStyles(workType)}
+              slotProps={{
+                select: {
+                  MenuProps: getDropdownMenuProps(),
+                },
+              }}
+            >
+              <MenuItem sx={dropdownItemStyles} value="remote">
+                Remote
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="hybrid">
+                Hybrid
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="onsite">
+                On-site
+              </MenuItem>
+            </TextField>
+
             <TextField
               required
+              select
+              id="distance"
+              label="Distance"
+              value={distance}
+              fullWidth
+              margin="normal"
+              onChange={(event) => setDistance(event.target.value)}
+              sx={getInputStyles(distance)}
+              slotProps={{
+                select: {
+                  MenuProps: getDropdownMenuProps(),
+                },
+              }}
+            >
+              <MenuItem sx={dropdownItemStyles} value="5">
+                Within 5 miles
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="10">
+                Within 10 miles
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="25">
+                Within 25 miles
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="50">
+                Within 50 miles
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="100">
+                Within 100 miles
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="anywhere">
+                Anywhere
+              </MenuItem>
+            </TextField>
+
+            <TextField
               select
               id="salary-range"
               label="Salary Range"
@@ -214,38 +297,61 @@ function JobSearchSetupPage() {
                 $150,000 +
               </MenuItem>
             </TextField>
+          </div>
 
+          <div className="input-field-container">
             <TextField
-              required
               select
-              id="work-type"
-              label="Work Type"
-              value={workType}
+              id="education"
+              label="Education"
+              value={education}
               fullWidth
               margin="normal"
-              onChange={(event) => setWorkType(event.target.value)}
-              sx={getInputStyles(workType)}
+              onChange={(event) => setEducation(event.target.value)}
+              sx={getInputStyles(education)}
               slotProps={{
                 select: {
                   MenuProps: getDropdownMenuProps(),
                 },
               }}
             >
-              <MenuItem sx={dropdownItemStyles} value="remote">
-                Remote
+              <MenuItem sx={dropdownItemStyles} value="none">
+                No Degree Required
               </MenuItem>
 
-              <MenuItem sx={dropdownItemStyles} value="hybrid">
-                Hybrid
+              <MenuItem sx={dropdownItemStyles} value="high-school">
+                High School Diploma / GED
               </MenuItem>
 
-              <MenuItem sx={dropdownItemStyles} value="onsite">
-                On-site
+              <MenuItem sx={dropdownItemStyles} value="some-college">
+                Some College
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="associate">
+                Associate Degree
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="bachelors">
+                Bachelor's Degree
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="masters">
+                Master's Degree
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="doctorate">
+                Doctorate / PhD
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="certification">
+                Certification / Bootcamp
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="no-preference">
+                No Preference
               </MenuItem>
             </TextField>
-          </div>
 
-          <div className="input-field-container">
             <TextField
               select
               id="experience-level"
@@ -261,8 +367,20 @@ function JobSearchSetupPage() {
                 },
               }}
             >
+              <MenuItem sx={dropdownItemStyles} value="intern">
+                Intern
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="apprentice">
+                Apprentice
+              </MenuItem>
+
               <MenuItem sx={dropdownItemStyles} value="entry-level">
                 Entry Level
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="associate">
+                Associate
               </MenuItem>
 
               <MenuItem sx={dropdownItemStyles} value="junior">
@@ -277,15 +395,43 @@ function JobSearchSetupPage() {
                 Senior
               </MenuItem>
 
+              <MenuItem sx={dropdownItemStyles} value="staff">
+                Staff
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="senior-staff">
+                Senior Staff
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="principal">
+                Principal
+              </MenuItem>
+
               <MenuItem sx={dropdownItemStyles} value="lead">
                 Lead
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="manager">
+                Manager
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="director">
+                Director
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="vp">
+                VP
+              </MenuItem>
+
+              <MenuItem sx={dropdownItemStyles} value="contractor">
+                Contractor
               </MenuItem>
             </TextField>
 
             <TextField
               select
               id="target-company"
-              label="Target Company"
+              label="Company"
               value={targetCompany}
               fullWidth
               margin="normal"

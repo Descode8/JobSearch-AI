@@ -65,10 +65,26 @@ export function getInputStyles(value) {
 
         "& .MuiInputLabel-root.MuiInputLabel-shrink": {
             color: isFilled ? "#ffffff" : focusColor,
+            fontSize: "1.1rem",
+            fontWeight: 700,
+            backgroundColor: "rgba(5, 9, 20, 0.65)",
+            backdropFilter: "blur(4px)",
+            WebkitBackdropFilter: "blur(4px)",
+            paddingLeft: "5px",
+            paddingRight: "5px",
+            borderRadius: "6px",
         },
 
         "& .MuiInputLabel-root.Mui-focused.MuiInputLabel-shrink": {
             color: focusColor,
+            fontSize: "1.1rem",
+            fontWeight: 700,
+            backgroundColor: "rgba(5, 9, 20, 0.65)",
+            backdropFilter: "blur(4px)",
+            WebkitBackdropFilter: "blur(4px)",
+            paddingLeft: "5px",
+            paddingRight: "5px",
+            borderRadius: "6px",
         },
 
         "& .MuiInputBase-input::placeholder": {
@@ -86,7 +102,7 @@ export function getDropdownMenuProps() {
                     background: "linear-gradient(#050914, #050914) padding-box, var(--btn-gradient-border) ",
                     border: ".5px solid white",
                     borderRadius: "12px",
-                    boxShadow: "0 18px 40px rgba(0, 0, 0, 0.45)",
+                    boxShadow: "0 0 18px rgba(155, 92, 255, 0.35)",
                     overflow: "auto",
                     height: "max-content",
                     maxHeight: "250px",

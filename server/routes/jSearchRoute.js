@@ -8,6 +8,8 @@ router.post("/search", async (req, res) => {
             location,
             salaryRange,
             workType,
+            distance,
+            education,
             experienceLevel,
             targetCompany,
             veteranStatus,
@@ -20,6 +22,8 @@ router.post("/search", async (req, res) => {
             location,
             salaryRange,
             workType,
+            distance,
+            education,
             experienceLevel,
             targetCompany,
             veteranStatus,
@@ -27,9 +31,10 @@ router.post("/search", async (req, res) => {
             extraDetails,
         };
 
-        console.log("Job search payload received:", jobSearchPayload);
+        // console.log("Job search payload received:", jobSearchPayload);
 
         res.json({
+            success: true,
             message: "Job search data received successfully",
             jobSearchPayload,
         });
