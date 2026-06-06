@@ -67,7 +67,7 @@ function ResumeDropZone({ onFileSelected }) {
 
     return (
         <div className="dropzone-container">
-        <h3>Upload Your Resume</h3>
+        <h2>Upload Your Resume</h2>
 
         <p>
             I'll save a copy of your original resume here! Then as you apply, I will

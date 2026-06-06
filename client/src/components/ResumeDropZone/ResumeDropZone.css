@@ -47,15 +47,14 @@
     margin: 1.5rem auto 1.5rem;
     border-radius: 14px;
     overflow: hidden;
-
     border: 2px solid transparent;
 
     background:
-        linear-gradient(oklch(29.444% 0.03311 257.696), oklch(29.444% 0.03311 257.696)) padding-box,
-        linear-gradient(90deg, #1d4ed8, #c026d3, #6b21a8, #22c55e) border-box;
+        linear-gradient(#050914, #050914) padding-box, var(--btn-gradient-border) border-box,
+        var(--btn-gradient-border) border-box;
 
     box-shadow:
-        0 0 18px rgba(155, 92, 255, 0.35),
+        var(--btn-hover-shadow),
         rgba(0, 0, 0, 0.16) 0 10px 25px,
         rgba(0, 0, 0, 0.08) 0 4px 10px;
 }
@@ -98,7 +97,7 @@
 
 .resume-file-info p {
     margin: 0.25rem 0 0;
-    color: var(--text);
+    color: var(--input-filled);
     font-size: 0.85rem;
     text-align: left;
 }

@@ -5,8 +5,8 @@
   --border: #e5e4e7;
   --code-bg: #f4f3ec;
   --accent: #aa3bff;
-  --btn: oklch(48.8% 0.243 264.376);
-  --btn-hover: #4f3bd6;
+  --btn: #172554;
+  --btn-hover: #4733cf;
   --input-filled: #27ae60;
   --btn-gradient-border: linear-gradient(
     90deg,
@@ -50,7 +50,7 @@
   :root {
     --text: oklch(44.6% 0.03 256.802);
     --text-h: #f3f4f6;
-    --bg: #02061897;
+    --bg: #02040b;
     --border: #2e303a;
     --code-bg: #1f2028;
     --accent: #c084fc;
@@ -105,7 +105,7 @@ h2,
 h3 {
   font-family: var(--heading);
   font-weight: 500;
-  color: var(--text-h);
+  color: var(--btn-hover);
 }
 
 h1 {
@@ -113,6 +113,7 @@ h1 {
   line-height: 1.05;
   letter-spacing: -1.68px;
   margin: 32px 0;
+  color: var(--btn-hover);
 }
 
 h2 {

@@ -83,13 +83,14 @@ export function getDropdownMenuProps() {
         slotProps: {
             paper: {
                 sx: {
-                    backgroundColor: "var(--text)",
-                    border: ".5px solid var(--btn)",
+                    background: "linear-gradient(#050914, #050914) padding-box, var(--btn-gradient-border) ",
+                    border: ".5px solid white",
                     borderRadius: "12px",
                     boxShadow: "0 18px 40px rgba(0, 0, 0, 0.45)",
                     overflow: "auto",
                     height: "max-content",
                     maxHeight: "250px",
+                    color: "#ffffff",
                 },
             },
         },
@@ -97,23 +98,36 @@ export function getDropdownMenuProps() {
 }
 
 export const dropdownItemStyles = {
-    color: "white",
+    color: "#ffffff",
     fontFamily: "var(--sans)",
     fontSize: "0.95rem",
+    minHeight: "42px",
+    transition:
+        "background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease",
 
     "&:hover": {
-        backgroundColor: "var(--btn-hover)",
+        background:
+            "linear-gradient(var(--btn), var(--btn)) padding-box",
         color: "#ffffff",
     },
 
     "&.Mui-selected": {
-        backgroundColor: "rgba(39, 174, 96, 0.25)",
-        color: "var(--input-filled)",
+        background:
+            "linear-gradient(var(--social-bg), var(--social-bg)) padding-box",
+        color: "#ffffff",
         fontWeight: 700,
     },
 
     "&.Mui-selected:hover": {
-        backgroundColor: "rgba(39, 174, 96, 0.35)",
+        background:
+            "linear-gradient(var(--btn), var(--btn)) padding-box",
+        color: "#ffffff",
+    },
+
+    "&.Mui-focusVisible": {
+        background:
+            "linear-gradient(var(--btn), var(--btn)) padding-box",
+        color: "#ffffff",
     },
 };
 
@@ -127,12 +141,28 @@ export const buttonStyles = {
     padding: "8px 25px",
     fontSize: "16px",
     fontWeight: 800,
-    transition: "transform 0.2s ease, box-shadow 0.2s ease",
+    transform: "translateY(0) scale(1)",
+    transition:
+        "background 0.45s ease, box-shadow 0.45s ease, border-color 0.45s ease, transform 0.45s ease",
 
     "&:hover": {
         background:
             "linear-gradient(#050914, #050914) padding-box, var(--btn-gradient-border) border-box",
         boxShadow: "var(--btn-hover-shadow)",
-        transform: "translateY(-1px)",
+        animation: "voiceBreathing 2.4s ease-in-out infinite",
+    },
+
+    "@keyframes voiceBreathing": {
+        "0%": {
+            transform: "translateY(-1px) scale(1)",
+        },
+
+        "50%": {
+            transform: "translateY(-1px) scale(1.05)",
+        },
+
+        "100%": {
+            transform: "translateY(-1px) scale(1)",
+        },
     },
 };

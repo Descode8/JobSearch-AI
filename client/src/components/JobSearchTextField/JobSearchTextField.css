@@ -9,6 +9,10 @@
     /* border: 2px solid pink; */
 }
 
+.job-search-text-field-container h3 {
+    width: 1000px;
+}
+
 .extra-details-input-wrapper {
     position: relative;
 }
