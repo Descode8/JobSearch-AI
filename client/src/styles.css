@@ -113,6 +113,7 @@ h1 {
   line-height: 1.05;
   letter-spacing: -1.68px;
   margin: 32px 0;
+  margin-bottom: 0;
   color: var(--btn-hover);
 }
 

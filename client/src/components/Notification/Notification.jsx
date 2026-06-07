@@ -8,7 +8,7 @@ function Notification({ type }) {
     if (type === "success") {
         return (
             <div className="notification-success">
-                Preferences saved successfully!
+                Job search started successfully!
             </div>
         );
     }
@@ -16,7 +16,15 @@ function Notification({ type }) {
     if (type === "error") {
         return (
             <div className="notification-error">
-                Something went wrong. Please try again.
+                Job search failed. Please try again.
+            </div>
+        );
+    }
+
+    if (type === "warning") {
+        return (
+            <div className="notification-warning">
+                Please upload your resume first.
             </div>
         );
     }

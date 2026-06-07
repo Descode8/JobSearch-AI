@@ -5,10 +5,7 @@
 .job-search-text-field-container {
     display: flex;
     flex-direction: column;
-}
-
-.job-search-text-field-container h3 {
-    width: 1000px;
+    width: 80%;
 }
 
 .extra-details-input-wrapper {

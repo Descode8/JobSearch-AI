@@ -1,16 +1,209 @@
 .notification-success,
-.notification-error {
+.notification-error,
+.notification-warning {
     display: block;
-    background: #166534;
     color: white;
     font-size: 1rem;
     font-weight: 500;
-    padding: 5px 16px;
-    margin: 16px 0;
-    border-radius: 8px;
+    padding: 3px 15px;
+    border-radius: 16px;
     text-align: center;
+
+    position: fixed;
+    top: 50px;
+    right: 20px;
+    transform: translateY(-50%);
+
+    z-index: 9999;
+    width: fit-content;
+
+    animation: notificationFadeOut 3.2s ease-in-out forwards;
+
+    background: linear-gradient(
+        135deg,
+        #3f6212 0%,
+        #65a30d 45%,
+        #7fad40 100%
+    );
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    box-shadow:
+        0 0 30px rgba(79, 70, 229, 0.15),
+        0 18px 40px rgba(0, 0, 0, 0.35);
+
+    backdrop-filter: blur(12px);
 }
 
+/* Diamond on the right side */
+.notification-success::before,
+.notification-error::before,
+.notification-warning::before {
+    content: "";
+    position: absolute;
+
+    right: -7px;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+
+    width: 14px;
+    height: 14px;
+
+    background: linear-gradient(
+        135deg,
+        #3f6212 0%,
+        #65a30d 45%,
+        #7fad40 100%
+    );
+
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Glow layer */
+.notification-success::after,
+.notification-error::after,
+.notification-warning::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    border-radius: 16px;
+
+    background: linear-gradient(
+        90deg,
+        #3f6212 0%,
+        #65a30d 45%,
+        #7fad40 100%
+    );
+
+    filter: blur(16px);
+    opacity: 0.5;
+
+    z-index: -1;
+}
+
+/* Success version */
+.notification-success {
+    background: linear-gradient(
+        135deg,
+        #3f6212 0%,
+        #65a30d 45%,
+        #7fad40 100%
+    );
+}
+
+.notification-success::before {
+    background: linear-gradient(
+        135deg,
+        #3f6212 0%,
+        #65a30d 45%,
+        #7fad40 100%
+    );
+}
+
+.notification-success::after {
+    background: linear-gradient(
+        90deg,
+        #3f6212 0%,
+        #65a30d 45%,
+        #7fad40 100%
+    );
+}
+
+/* Error version */
 .notification-error {
-    background: #ef4444;
+    background: linear-gradient(
+        135deg,
+        #450a0a 0%,
+        #991b1b 45%,
+        #d54e4e 100%
+    );
+
+    border: 1px solid rgba(248, 113, 113, 0.35);
+
+    box-shadow:
+        0 0 30px rgba(220, 38, 38, 0.2),
+        0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+.notification-error::before {
+    background: linear-gradient(
+        135deg,
+        #450a0a 0%,
+        #991b1b 45%,
+        #d54e4e 100%
+    );
+
+    border-right: 1px solid rgba(248, 113, 113, 0.35);
+    border-top: 1px solid rgba(248, 113, 113, 0.35);
+}
+
+.notification-error::after {
+    background: linear-gradient(
+        90deg,
+        #450a0a 0%,
+        #991b1b 45%,
+        #d54e4e 100%
+    );
+}
+
+/* Warning version */
+.notification-warning {
+    background: linear-gradient(
+        135deg,
+        #b85f11 0%,
+        #d1930d 45%,
+        #dfb613 100%
+    );
+
+    border: 1px solid rgba(250, 204, 21, 0.35);
+
+    box-shadow:
+        0 0 30px rgba(250, 204, 21, 0.2),
+        0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+.notification-warning::before {
+    background: linear-gradient(
+        135deg,
+        #b85f11 0%,
+        #d1930d 45%,
+        #dfb613 100%
+    );
+
+    border-right: 1px solid rgba(250, 204, 21, 0.35);
+    border-top: 1px solid rgba(250, 204, 21, 0.35);
+}
+
+.notification-warning::after {
+    background: linear-gradient(
+        90deg,
+        #b85f11 0%,
+        #d1930d 45%,
+        #dfb613 100%
+    );
+}
+
+/* Fade in, stay visible, then fade out */
+@keyframes notificationFadeOut {
+    0% {
+        opacity: 0;
+        transform: translateY(-65%);
+    }
+
+    10% {
+        opacity: 1;
+        transform: translateY(-50%);
+    }
+
+    80% {
+        opacity: 1;
+        transform: translateY(-50%);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(-65%);
+    }
 }

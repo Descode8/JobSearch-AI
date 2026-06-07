@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import "./JobSearchPageSetup.css";
 import "../../styles.css";
@@ -22,7 +22,20 @@ function JobSearchSetupPage() {
   const [jobSearchSetupPageData, setJobSearchSetupPageData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const [notification, setNotification] = useState("")
+  const [notification, setNotification] = useState("");
+  const notificationTimerRef = useRef(null);
+
+  function showNotification(type) {
+    setNotification(type);
+
+    if (notificationTimerRef.current) {
+      clearTimeout(notificationTimerRef.current);
+    }
+
+    notificationTimerRef.current = setTimeout(() => {
+      setNotification("");
+    }, 3200);
+  }
 
   // Input Field States
   const [jobTitle, setJobTitle]       = useState("");
@@ -31,7 +44,7 @@ function JobSearchSetupPage() {
   const [workType, setWorkType]       = useState("");
   const [distance, setDistance]       = useState("");
   
-  const [education, setEducation]                   = useState("");
+  const [education, setEducation]                 = useState("");
   const [experienceLevel, setExperienceLevel]     = useState("");
   const [targetCompany, setTargetCompany]         = useState("");
   const [veteranStatus, setVeteranStatus]         = useState("");
@@ -46,6 +59,14 @@ function JobSearchSetupPage() {
 
   useEffect(() => {
     getJobSearchSetupPageData();
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (notificationTimerRef.current) {
+        clearTimeout(notificationTimerRef.current);
+      }
+    };
   }, []);
 
   async function getJobSearchSetupPageData() {
@@ -74,7 +95,7 @@ function JobSearchSetupPage() {
     event.preventDefault();
 
     if (!resumeFile) {
-      alert("Please upload your resume before submitting.");
+      showNotification("warning");
       return;
     }
 
@@ -110,13 +131,13 @@ function JobSearchSetupPage() {
 
       // Show notification on UI
       jobSearchResponse.data.success && resumeUploadResponse.data.success
-        ? setNotification("success")
-        : setNotification("error");
+        ? showNotification("success")
+        : showNotification("error");
 
       console.log("Resume upload response:", resumeUploadResponse.data);
     } catch (error) {
       console.error("Error submitting job search form:", error);
-      setNotification("error");
+      showNotification("error");
     }
   }
 
@@ -138,13 +159,12 @@ function JobSearchSetupPage() {
 
   return (
     <main className="page">
+      <Notification type={notification} />
       <section className="setup-page">
 
         <div className="page-title">
           <h1>{jobSearchSetupPageData.pageTitle}</h1>
         </div>
-
-        <Notification type={notification} />
         <p>Let's get you set up! Please fill out all of the fields below...</p>
 
         <form className="setup-form" onSubmit={handleSubmit}>
