@@ -1,0 +1,126 @@
+.navbar {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px 30px;
+    padding-left: 20px;
+    background: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    position: relative;
+    z-index: 10;
+}
+
+/* Left icon */
+.app-name-icon-container {
+    width: 60px;
+    height: 60px;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 2px solid transparent;
+    border-radius: 50%;
+    background: transparent;
+
+    cursor: pointer;
+
+    transition:
+        background 0.45s ease,
+        box-shadow 0.45s ease,
+        transform 0.45s ease,
+        opacity 0.45s ease;
+}
+
+.app-name-icon-container::before {
+    content: "";
+
+    width: 36px;
+    height: 36px;
+    display: block;
+
+    background-color: var(--btn-hover);
+
+    mask-image: url("/images/icons/icon.svg");
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+
+    -webkit-mask-image: url("/images/icons/icon.svg");
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+}
+
+.app-name-icon-container:hover {
+    opacity: 0.95;
+
+    background:
+        linear-gradient(#050914, #050914) padding-box,
+        var(--btn-gradient-border) border-box;
+
+    box-shadow: var(--btn-hover-shadow);
+    animation: voiceBreathing 2.4s ease-in-out infinite;
+}
+
+.app-name-icon-container:hover::before {
+    background-color: #ffffff;
+}
+
+/* True centered title */
+.navbar h2 {
+    margin: 0;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    font-size: 34px;
+    font-weight: 900;
+    color: var(--btn);
+    line-height: 1;
+    white-space: nowrap;
+}
+
+/* Right links */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    white-space: nowrap;
+}
+
+.nav-links a {
+    color: var(--btn);
+    text-decoration: none;
+    font-weight: 700;
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.nav-links a:hover {
+    color: var(--btn-hover);
+    transform: translateY(-1px);
+}
+
+@keyframes voiceBreathing {
+    0% {
+        transform: translateY(-1px) scale(1);
+    }
+
+    50% {
+        transform: translateY(-1px) scale(1.05);
+    }
+
+    100% {
+        transform: translateY(-1px) scale(1);
+    }
+}

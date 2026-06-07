@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import JobSearchSetupPage from "./components/JobSearchSetupPage/JobSearchPageSetup.jsx";
 import axios from "axios";
+
+import JobSearchSetupPage from "./components/JobSearchSetupPage/JobSearchPageSetup.jsx";
+import Navbar from "./components/Navbar/Navbar.jsx"
+
 import "./App.css";
 import "./styles.css";
+
 import Button from "@mui/material/Button";
 import { buttonStyles } from "./utils/muiStyles.js";
+
 
 {/* App is your root React component. */}
 {/* main.jsx renders this component into <div id="root"></div> in index.html. */}
@@ -91,19 +96,7 @@ function LandingPage() {
   */
   return (
     <main className="page">
-      {/* Navbar section */}
-      <nav className="navbar">
-        {/* This value comes from the server */}
-        <div className="app-name-icon-container">
-          <h2>{landingData.appName}</h2>
-          <img src={landingData.appIcon} alt={`${landingData.appName} icon`} />
-        </div>
-        <div className="nav-links">
-          <a href="#features">Features</a>
-          <a href="#how-it-works">How It Works</a>
-        </div>
-      </nav>
-
+      <Navbar/>
       {/* Hero section */}
       <section className="hero">
         <div className="hero-text">

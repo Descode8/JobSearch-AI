@@ -1,5 +1,9 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+
+import Navbar from "../Navbar/Navbar.jsx";
+
 import "./JobSearchPageSetup.css";
 import "../../styles.css";
 import {
@@ -19,6 +23,8 @@ import JobSearchTextField from "../JobSearchTextField/JobSearchTextField.jsx";
 import Notification from "../Notification/Notification.jsx";
 
 function JobSearchSetupPage() {
+  const navigate = useNavigate();
+
   const [jobSearchSetupPageData, setJobSearchSetupPageData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -161,12 +167,12 @@ function JobSearchSetupPage() {
     <main className="page">
       <Notification type={notification} />
       <section className="setup-page">
-
+        <Navbar/>
         <div className="page-title">
           <h1>{jobSearchSetupPageData.pageTitle}</h1>
         </div>
         <p>Let's get you set up! Please fill out all of the fields below...</p>
-
+        
         <form className="setup-form" onSubmit={handleSubmit}>
           <div className="input-field-container">
             <TextField

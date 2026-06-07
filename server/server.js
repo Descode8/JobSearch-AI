@@ -29,8 +29,6 @@ app.get("/", (req, res) => {
 
 app.get("/api/landing", (req, res) => {
     res.json({
-        appName: "JobSearch AI",
-        appIcon: "./images/icons/icon.svg",
         headline: "AI-powered job search, resume matching, and application tracking.",
         subheadline:
             "Search job opportunities, save listings, analyze resume fit, generate tailored materials, and organize your job search workflow.",

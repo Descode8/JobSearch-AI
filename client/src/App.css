@@ -14,37 +14,6 @@
   margin-bottom: 5px;
 }
 
-.navbar {
-  padding: 24px 2%;
-  background: white;
-  border-bottom: 1px solid var(--social-bg);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.navbar h2 {
-  margin: 0;
-  font-size: 30px;
-  color: var(--btn);
-  font-weight: bold;
-}
-
-.nav-links {
-  display: flex;
-  gap: 24px;
-}
-
-.nav-links a {
-  color: var(--btn-hover);
-  text-decoration: none;
-  font-weight: 700;
-}
-
-.nav-links a:hover {
-  color: var(--text-h);
-}
-
 .hero {
   padding: 50px 8%;
   display: grid;
