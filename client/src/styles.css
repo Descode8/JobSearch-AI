@@ -8,7 +8,7 @@
   --btn: #172554;
   --btn-hover: #5443c5;
   --input-filled: #27ae60;
-  --header: #22377a;
+  --header: #2d489e;
   --btn-gradient-border: linear-gradient(
     90deg,
     #1d4ed8,
@@ -49,7 +49,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text: oklch(44.6% 0.03 256.802);
+    --text: #c7c7c7;
     --text-h: #f3f4f6;
     --bg: #02040b;
     --border: #2e303a;
@@ -209,7 +209,7 @@ code {
   will-change: transform, opacity;
 }
 
-/* Main floating tiny dot layer 
+/* Main floating tiny dot layer  */
 .page::before {
   background-image:
     radial-gradient(circle at 12px 18px, rgba(0, 170, 255, 0.32) 0 1px, transparent 1px),
@@ -282,7 +282,7 @@ code {
   background-repeat: repeat;
 
   animation: floatDotsTwo 10s ease-in-out infinite alternate;
-} */
+}
 
 @keyframes floatDotsOne {
   0% {

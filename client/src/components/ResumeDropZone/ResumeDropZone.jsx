@@ -70,11 +70,9 @@ function ResumeDropZone({ onFileSelected }) {
         <h2>Upload Your Resume</h2>
 
         <p>
-            I'll save a copy of your original resume here! Then as you apply, I will
-            make a new copy of your resume, tailoring it to the position you're
-            applying for!
+            Upload your resume, and as you apply to jobs, 
+            I’ll provide tailored suggestions to help you improve it for each specific role.
         </p>
-
         {!selectedFile && (
             <Box
                 {...getRootProps()}
