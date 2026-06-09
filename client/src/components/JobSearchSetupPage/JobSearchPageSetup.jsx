@@ -606,7 +606,9 @@ function JobSearchSetupPage() {
           </Button>
         </form>
       </section>
+      {/* <Footer/> */}
     </main>
+    
   );
 }
 

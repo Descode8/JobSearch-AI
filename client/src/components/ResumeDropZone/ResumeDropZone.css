@@ -47,16 +47,16 @@
     margin: 1.5rem auto 1.5rem;
     border-radius: 14px;
     overflow: hidden;
-    border: 2px solid transparent;
+    border: 2px solid var(--input-filled);
 
-    background:
+    /* background:
         linear-gradient(#050914, #050914) padding-box, var(--btn-gradient-border) border-box,
-        var(--btn-gradient-border) border-box;
+        var(--btn-gradient-border) border-box;*/
 
     box-shadow:
         var(--btn-hover-shadow),
         rgba(0, 0, 0, 0.16) 0 10px 25px,
-        rgba(0, 0, 0, 0.08) 0 4px 10px;
+        rgba(0, 0, 0, 0.08) 0 4px 10px; 
 }
 
 .resume-preview-header {

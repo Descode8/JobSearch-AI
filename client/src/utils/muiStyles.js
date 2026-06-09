@@ -4,43 +4,33 @@ export function getInputStyles(value) {
     const borderColor = "#ffffff";
     const placeholderColor = "var(--text)";
     const focusColor = "white";
-    
-    // Default input background when empty
+    const filledColor = "var(--input-filled)";
+
     const defaultInputBackground = "var(--social-bg)";
-
-    // Inner background when filled, same idea as your button hover
     const filledInputBackground = "#050914";
-
-    const filledGradient =
-        "linear-gradient(90deg, #1d4ed8, #c026d3, #6b21a8, #22c55e)";
 
     return {
         "& .MuiOutlinedInput-root": {
             borderRadius: "10px",
             color: "#ffffff",
-            backgroundColor: defaultInputBackground,
+            backgroundColor: isFilled
+                ? filledInputBackground
+                : defaultInputBackground,
 
             "& fieldset": {
-                borderColor: isFilled ? "transparent" : borderColor,
+                borderColor: isFilled ? filledColor : borderColor,
                 borderWidth: isFilled ? "2px" : ".75px",
             },
 
             "&:hover fieldset": {
-                borderColor: isFilled ? "transparent" : borderColor,
+                borderColor: isFilled ? filledColor : borderColor,
                 borderWidth: "2px",
             },
 
             "&.Mui-focused fieldset": {
-                borderColor: isFilled ? "transparent" : focusColor,
+                borderColor: focusColor,
                 borderWidth: "2px",
             },
-
-            ...(isFilled && {
-                border: "2px solid transparent",
-                background:
-                    `linear-gradient(${filledInputBackground}, ${filledInputBackground}) padding-box, ${filledGradient} border-box`,
-                boxShadow: "0 0 18px rgba(155, 92, 255, 0.35)",
-            }),
         },
 
         "& .MuiInputBase-input": {
@@ -52,11 +42,15 @@ export function getInputStyles(value) {
         },
 
         "& .MuiSvgIcon-root": {
-            color: isFilled ? "#ffffff" : borderColor,
+            color: isFilled ? filledColor : borderColor,
+        },
+
+        "& .MuiOutlinedInput-root.Mui-focused .MuiSvgIcon-root": {
+            color: focusColor,
         },
 
         "& .MuiInputLabel-root": {
-            color: isFilled ? "#ffffff" : placeholderColor,
+            color: isFilled ? filledColor : placeholderColor,
         },
 
         "& .MuiInputLabel-root.Mui-focused": {
@@ -64,7 +58,7 @@ export function getInputStyles(value) {
         },
 
         "& .MuiInputLabel-root.MuiInputLabel-shrink": {
-            color: isFilled ? "#ffffff" : focusColor,
+            color: isFilled ? filledColor : focusColor,
             fontSize: "1.1rem",
             fontWeight: 700,
             backgroundColor: "rgba(5, 9, 20, 0.65)",
@@ -96,14 +90,17 @@ export function getInputStyles(value) {
 
 export function getDropdownMenuProps() {
     return {
+        disableScrollLock: true,
+
         slotProps: {
             paper: {
                 sx: {
-                    background: "linear-gradient(#050914, #050914) padding-box, var(--btn-gradient-border) ",
+                    background: "#050914",
                     border: ".5px solid white",
                     borderRadius: "12px",
                     boxShadow: "0 0 18px rgba(155, 92, 255, 0.35)",
-                    overflow: "auto",
+                    overflowY: "auto",
+                    overflowX: "hidden",
                     height: "max-content",
                     maxHeight: "250px",
                     color: "#ffffff",
@@ -122,8 +119,7 @@ export const dropdownItemStyles = {
         "background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease",
 
     "&:hover": {
-        background:
-            "linear-gradient(var(--btn), var(--btn)) padding-box",
+        background: "var(--header)",
         color: "#ffffff",
     },
 
@@ -157,28 +153,45 @@ export const buttonStyles = {
     padding: "8px 25px",
     fontSize: "16px",
     fontWeight: 800,
-    transform: "translateY(0) scale(1)",
+    transform: "scale(1)",
     transition:
         "background 0.45s ease, box-shadow 0.45s ease, border-color 0.45s ease, transform 0.45s ease",
 
     "&:hover": {
         background:
             "linear-gradient(#050914, #050914) padding-box, var(--btn-gradient-border) border-box",
+        backgroundSize: "100% 100%, 300% 300%",
+        backgroundPosition: "center, 0% 50%",
         boxShadow: "var(--btn-hover-shadow)",
-        animation: "voiceBreathing 2.4s ease-in-out infinite",
+        animation:
+            "movingGradientBorder 3s linear infinite, voiceBreathing 2.4s ease-in-out infinite",
+    },
+
+    "@keyframes movingGradientBorder": {
+        "0%": {
+            backgroundPosition: "center, 0% 50%",
+        },
+
+        "50%": {
+            backgroundPosition: "center, 100% 50%",
+        },
+
+        "100%": {
+            backgroundPosition: "center, 0% 50%",
+        },
     },
 
     "@keyframes voiceBreathing": {
         "0%": {
-            transform: "translateY(-1px) scale(1)",
+            transform: "scale(1)",
         },
 
         "50%": {
-            transform: "translateY(-1px) scale(1.05)",
+            transform: "scale(1.01)",
         },
 
         "100%": {
-            transform: "translateY(-1px) scale(1)",
+            transform: "scale(1)",
         },
     },
 };

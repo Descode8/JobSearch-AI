@@ -10,7 +10,18 @@
 
     position: relative;
     z-index: 10;
-    gap: 10px;
+    border-bottom: 2px solid var(--header);
+}
+
+.job-search-logo {
+    height: 45px;
+    width: auto;
+    display: block;
+    cursor: pointer;
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
 }
 
 .navbar-left {
@@ -28,13 +39,9 @@
     gap: 18px;
 }
 
-/* Icons */
-.app-icon-container,
 .menu-icon-container {
-    width: 60px;
-    height: 60px;
-    min-width: 60px;
-    min-height: 60px;
+    min-width: 50px;
+    min-height: 50px;
     box-sizing: border-box;
 
     display: flex;
@@ -54,24 +61,8 @@
         opacity 0.45s ease;
 }
 
-.app-icon-container::before {
-    content: "";
-
-    width: 36px;
-    height: 36px;
-    display: block;
-
-    background-color: var(--btn-hover);
-
-    mask-image: url("/images/icons/icon.svg");
-    mask-repeat: no-repeat;
-    mask-position: center;
-    mask-size: contain;
-
-    -webkit-mask-image: url("/images/icons/icon.svg");
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-position: center;
-    -webkit-mask-size: contain;
+.menu-icon-container {
+    margin-left: 10px;
 }
 
 .menu-icon-container::before {
@@ -81,7 +72,7 @@
     height: 26px;
     display: block;
 
-    background-color: var(--btn-hover);
+    background-color: var(--header);
 
     mask-image: url("/images/icons/menu.svg");
     mask-repeat: no-repeat;
@@ -94,19 +85,18 @@
     -webkit-mask-size: contain;
 }
 
-.app-icon-container:hover,
 .menu-icon-container:hover {
     opacity: 0.95;
 
     background:
         linear-gradient(#050914, #050914) padding-box,
         var(--btn-gradient-border) border-box;
-
-    box-shadow: var(--btn-hover-shadow);
-    /* animation: voiceBreathing 2.4s ease-in-out infinite; */
 }
 
-.app-icon-container:hover::before,
+.menu-icon-container:hover::before {
+    background-color: #ffffff;
+}
+
 .menu-icon-container:hover::before {
     background-color: #ffffff;
 }
@@ -151,7 +141,7 @@
 }
 
 .nav-links a:hover {
-    color: var(--btn-hover);
+    color: var(--header);
     transform: translateY(-1px);
 }
 
@@ -190,7 +180,6 @@
         padding: 12px 14px;
     }
 
-    .app-icon-container,
     .menu-icon-container {
         width: 50px;
         height: 50px;

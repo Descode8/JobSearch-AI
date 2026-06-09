@@ -112,9 +112,9 @@ function LandingPage() {
               type="button"
               variant="contained"
               sx={{
-                            ...buttonStyles, 
-                            width: "100%",
-                            maxWidth: "300px"}}
+                ...buttonStyles, 
+                width: "100%",
+                maxWidth: "300px"}}
               onClick={() => navigate("/job-search-setup")}
             >
               Get Started

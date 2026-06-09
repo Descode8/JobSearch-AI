@@ -23,7 +23,7 @@ function JobSearchTextField(props) {
 
     return (
         <div className="job-search-text-field-container">
-            <h3>Anything else I should know? Please share below.</h3>
+            <h2>Anything else I should know? Please share below.</h2>
 
             <p>
                 I can use any extra details you share to improve your job search results,
