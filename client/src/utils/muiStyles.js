@@ -159,7 +159,7 @@ export const buttonStyles = {
 
     "&:hover": {
         background:
-            "linear-gradient(#050914, #050914) padding-box, var(--btn-gradient-border) border-box",
+            "linear-gradient(oklch(20.8% 0.042 265.755), oklch(27.9% 0.041 260.031)) padding-box, linear-gradient(90deg, #1d4ed8, #c026d3, #e3fc05, #22c55e) border-box",
         backgroundSize: "100% 100%, 300% 300%",
         backgroundPosition: "center, 0% 50%",
         boxShadow: "var(--btn-hover-shadow)",
@@ -187,7 +187,7 @@ export const buttonStyles = {
         },
 
         "50%": {
-            transform: "scale(1.01)",
+            transform: "scale(1.05)",
         },
 
         "100%": {

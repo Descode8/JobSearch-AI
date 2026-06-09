@@ -88,9 +88,17 @@
 .menu-icon-container:hover {
     opacity: 0.95;
 
-    background:
+    /* background:
         linear-gradient(#050914, #050914) padding-box,
-        var(--btn-gradient-border) border-box;
+        var(--btn-gradient-border) border-box; */
+        background: linear-gradient(oklch(20.8% 0.042 265.755), oklch(27.9% 0.041 260.031)) padding-box,
+        linear-gradient(
+        90deg,
+        #1d4ed8,
+        #c026d3,
+        #e3fc05,
+        #22c55e
+        ) border-box;
 }
 
 .menu-icon-container:hover::before {
