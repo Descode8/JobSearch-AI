@@ -106,7 +106,7 @@
 .step-card {
   padding: 24px;
   background: white;
-  border: 1px solid var(--btn-hover);
+  border: 1px solid var(--btn);
   box-shadow: 0 0px 10px var(--btn);
   border-radius: 18px;
 }
@@ -121,7 +121,7 @@
 
 .feature-card h3,
 .step-card h3 {
-  color: var(--header);
+  color: var(--btn);
   font-weight: bolder;
 }
 

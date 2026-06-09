@@ -10,7 +10,8 @@
 
     position: relative;
     z-index: 10;
-    border-bottom: 2px solid var(--header);
+    /* border-bottom: 2px solid var(--header); */
+    box-shadow: 0 0 320px #5e7ad4;
 }
 
 .job-search-logo {
@@ -72,7 +73,7 @@
     height: 26px;
     display: block;
 
-    background-color: var(--header);
+    background-color: var(--btn);
 
     mask-image: url("/images/icons/menu.svg");
     mask-repeat: no-repeat;

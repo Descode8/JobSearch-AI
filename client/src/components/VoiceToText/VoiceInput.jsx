@@ -66,7 +66,7 @@ function VoiceInput(props) {
             }
 
             onTranscriptionComplete(data.text || "");
-            setStatusMessage("");
+            setStatusMessage("Record your voice...");
         } catch (error) {
             console.error("Transcription error:", error);
             setStatusMessage("Could not transcribe your voice.");
