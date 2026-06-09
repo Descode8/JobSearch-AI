@@ -36,7 +36,13 @@
 .hero-card {
   background:
     linear-gradient(#050914, #050914) padding-box,
-    var(--btn-gradient-border) border-box;
+    linear-gradient(
+      90deg,
+      #1d4ed8,
+      #c026d3,
+      #22c55e
+    ) border-box;
+
   border: 2px solid transparent;
   border-radius: 24px;
   padding: 32px;
@@ -46,7 +52,8 @@
 .hero-card h3 {
   margin: 0;
   font-size: 30px;
-  color: var(--btn-hover);
+  color: white;
+  font-weight: bold;
 }
 
 .score {
@@ -55,7 +62,12 @@
   margin: 28px auto;
     background:
     linear-gradient(oklch(20.8% 0.042 265.755), oklch(27.9% 0.041 260.031)) padding-box,
-    var(--btn-gradient-border) border-box;
+        linear-gradient(
+      90deg,
+      #1d4ed8,
+      #c026d3,
+      #22c55e
+    ) border-box;
   border: 5px solid transparent;
   color: white;
   border-radius: 999px;
